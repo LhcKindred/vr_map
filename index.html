@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="山西省VR全景项目地图，提供项目列表和百度地图交互。">
+    <meta name="keywords" content="山西VR全景, 百度地图, 项目地图">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' data: blob:;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.map.baidu.com http://api.map.baidu.com https://*.map.baidu.com http://*.map.baidu.com https://*.bdimg.com http://*.bdimg.com https://unpkg.com;
+        style-src 'self' 'unsafe-inline' https://api.map.baidu.com http://api.map.baidu.com https://*.map.baidu.com http://*.map.baidu.com https://*.bdimg.com http://*.bdimg.com;
+        img-src 'self' data: blob: https://api.map.baidu.com http://api.map.baidu.com https://*.map.baidu.com http://*.map.baidu.com https://*.bdimg.com http://*.bdimg.com https://*.baidu.com http://*.baidu.com;
+        connect-src 'self' https://api.map.baidu.com http://api.map.baidu.com https://*.map.baidu.com http://*.map.baidu.com https://*.bdimg.com http://*.bdimg.com https://unpkg.com;
+        font-src 'self' https://api.map.baidu.com http://api.map.baidu.com https://*.map.baidu.com http://*.map.baidu.com https://*.bdimg.com http://*.bdimg.com data:;
+        worker-src 'self' blob:;
+        child-src 'self' blob:;
+    ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>山西省VR全景项目地图</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>山西省VR全景项目地图</h1>
+    </header>
+    <main class="container">
+        <button class="toggle-sidebar" aria-label="切换侧边栏">☰</button>
+        <nav id="tree-menu" class="sidebar" role="navigation" aria-label="项目树形菜单">
+            <h2>项目列表</h2>
+            <div class="search-wrapper">
+                <input type="text" id="search-box" placeholder="搜索项目名称..." aria-label="搜索项目名称">
+            </div>
+            <div id="tree-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>加载中，请稍候...</span>
+                </div>
+            </div>
+        </nav>
+        <div id="map-container" class="map-area">
+            <div class="loading">
+                <div class="spinner"></div>
+                <span>正在加载地图...</span>
+            </div>
+        </div>
+    </main>
+    <!-- <script src="./node_modules/virtual-scroller/dist/VirtualScroller.js"></script> -->
+    <script src="script.js"></script>
+</body>
+</html>

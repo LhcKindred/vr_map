@@ -1,0 +1,1936 @@
+[
+  {
+    "city": "太原市",
+    "districts": [
+      {
+        "district": "古交市",
+        "projects": [
+          {
+            "id": "太原市-古交市-0",
+            "name": "古交千佛寺",
+            "url": "https://www.720yun.com/vr/6f6jtpsmsn6",
+            "longitude": 112.17985380156544,
+            "latitude": 37.909948613066476
+          },
+          {
+            "id": "太原市-古交市-1",
+            "name": "三家关帝庙",
+            "url": "https://www.720yun.com/vr/7bfjt0tmsy6",
+            "longitude": 112.23315152510015,
+            "latitude": 37.79034649355401
+          }
+        ]
+      },
+      {
+        "district": "尖草坪区",
+        "projects": [
+          {
+            "id": "太原市-尖草坪区-2",
+            "name": "多福寺",
+            "url": "https://www.720yun.com/vr/7eejtphfsa8",
+            "longitude": 112.44174938316647,
+            "latitude": 37.973428722287586
+          },
+          {
+            "id": "太原市-尖草坪区-3",
+            "name": "镇城关帝庙",
+            "url": "https://www.720yun.com/vr/845jtphkrm8",
+            "longitude": 112.57404858477616,
+            "latitude": 38.03974679923744
+          },
+          {
+            "id": "太原市-尖草坪区-4",
+            "name": "歇马殿",
+            "url": "https://www.720yun.com/vr/6f6jtpkOtu4",
+            "longitude": 112.49360496703545,
+            "latitude": 37.94594335454805
+          },
+          {
+            "id": "太原市-尖草坪区-5",
+            "name": "马吉掌五龙庙",
+            "url": "https://www.720yun.com/vr/879jtp4auw6",
+            "longitude": 112.45641269349748,
+            "latitude": 38.01274662125445
+          },
+          {
+            "id": "太原市-尖草坪区-6",
+            "name": "银角观音寺",
+            "url": "https://www.720yun.com/vr/fbejtp4ksu1",
+            "longitude": 112.50487968932173,
+            "latitude": 37.91438232075896
+          }
+        ]
+      },
+      {
+        "district": "晋源区",
+        "projects": [
+          {
+            "id": "太原市-晋源区-7",
+            "name": "晋源阿育王塔",
+            "url": "https://www.720yun.com/vr/911jt5sn5a1",
+            "longitude": 112.50203035407463,
+            "latitude": 37.74429264820963
+          },
+          {
+            "id": "太原市-晋源区-8",
+            "name": "东街秦氏民宅（东街村秦氏民宅）",
+            "url": "https://www.720yun.com/vr/1e1jt0tOuf2",
+            "longitude": 112.541267,
+            "latitude": 37.579571
+          },
+          {
+            "id": "太原市-晋源区-9",
+            "name": "古城营九龙庙",
+            "url": "https://www.720yun.com/vr/a24jtptvky6",
+            "longitude": 112.50283209174229,
+            "latitude": 37.7495937385725
+          },
+          {
+            "id": "太原市-晋源区-10",
+            "name": "赤桥观音庙",
+            "url": "https://www.720yun.com/vr/a00jt5euzk4",
+            "longitude": 112.51059695474,
+            "latitude": 37.693212044939955
+          },
+          {
+            "id": "太原市-晋源区-11",
+            "name": "永宁寺",
+            "url": "https://www.720yun.com/vr/a64jtptvOy0",
+            "longitude": 112.48456424072192,
+            "latitude": 37.72116885784946
+          },
+          {
+            "id": "太原市-晋源区-12",
+            "name": "古寨玉皇庙",
+            "url": "https://www.720yun.com/vr/debjt0svkv4",
+            "longitude": 112.48686686723565,
+            "latitude": 37.73554102376718
+          }
+        ]
+      },
+      {
+        "district": "娄烦县",
+        "projects": [
+          {
+            "id": "太原市-娄烦县-13",
+            "name": "罗家曲观音寺",
+            "url": "https://www.720yun.com/vr/c7ejtpsyrO9",
+            "longitude": 111.97386974304152,
+            "latitude": 38.03208406802958
+          }
+        ]
+      },
+      {
+        "district": "清徐县",
+        "projects": [
+          {
+            "id": "太原市-清徐县-14",
+            "name": "清徐尧庙",
+            "url": "https://www.720yun.com/vr/b04jtpuksk5",
+            "longitude": 112.45292421388004,
+            "latitude": 37.508008076240095
+          },
+          {
+            "id": "太原市-清徐县-15",
+            "name": "狐突庙",
+            "url": "https://www.720yun.com/vr/0cajtptmsm1",
+            "longitude": 112.3174457294094,
+            "latitude": 37.63029220146208
+          },
+          {
+            "id": "太原市-清徐县-16",
+            "name": "清源文庙",
+            "url": "https://www.720yun.com/vr/e72jt5eyOu7",
+            "longitude": 112.35477697080977,
+            "latitude": 37.617762991446064
+          },
+          {
+            "id": "太原市-清徐县-17",
+            "name": "严香寺",
+            "url": "https://www.720yun.com/vr/833jtpmkrn6",
+            "longitude": 112.36455763137184,
+            "latitude": 37.613066838238375
+          },
+          {
+            "id": "太原市-清徐县-18",
+            "name": "清徐香岩寺",
+            "url": "https://www.720yun.com/vr/d52jtptfsO0",
+            "longitude": 112.3279974055907,
+            "latitude": 37.637112351231686
+          },
+          {
+            "id": "太原市-清徐县-19",
+            "name": "清泉寺",
+            "url": "https://www.720yun.com/vr/b10jtptkua0",
+            "longitude": 112.35475379452761,
+            "latitude": 37.64729360524415
+          },
+          {
+            "id": "太原市-清徐县-20",
+            "name": "文殊塔",
+            "url": "https://www.720yun.com/vr/de0jtptkra6",
+            "longitude": 112.36455763137184,
+            "latitude": 37.613066838238375
+          },
+          {
+            "id": "太原市-清徐县-21",
+            "name": "徐沟城隍庙、文庙",
+            "url": "https://www.720yun.com/vr/f29jtpukOk0",
+            "longitude": 112.541267,
+            "latitude": 37.579571
+          },
+          {
+            "id": "太原市-清徐县-22",
+            "name": "宝梵寺",
+            "url": "https://www.720yun.com/vr/27cjtpmuku4",
+            "longitude": 112.27906724344551,
+            "latitude": 37.60535894188586
+          },
+          {
+            "id": "太原市-清徐县-23",
+            "name": "大常寿宁寺",
+            "url": "https://www.720yun.com/vr/e27jtpumvu0",
+            "longitude": 112.61301321508532,
+            "latitude": 37.53721977826826
+          },
+          {
+            "id": "太原市-清徐县-24",
+            "name": "柴家寨关帝庙",
+            "url": "https://www.720yun.com/vr/9f9jtpmkrv0",
+            "longitude": 112.30676227180977,
+            "latitude": 37.58573651990654
+          }
+        ]
+      },
+      {
+        "district": "万柏林区",
+        "projects": [
+          {
+            "id": "太原市-万柏林区-25",
+            "name": "北魏石窟",
+            "url": "https://www.720yun.com/vr/270jtpymra3",
+            "longitude": 112.52257675702106,
+            "latitude": 37.8649744104023
+          },
+          {
+            "id": "太原市-万柏林区-26",
+            "name": "堡山龙王庙",
+            "url": "https://www.720yun.com/vr/0b8jtpymev9",
+            "longitude": 112.48543640554156,
+            "latitude": 37.879608120536744
+          }
+        ]
+      },
+      {
+        "district": "小店区",
+        "projects": [
+          {
+            "id": "太原市-小店区-27",
+            "name": "延圣寺",
+            "url": "https://www.720yun.com/vr/9ffjtpwO5m2",
+            "longitude": 112.53772685910793,
+            "latitude": 37.70200625799114
+          },
+          {
+            "id": "太原市-小店区-28",
+            "name": "贾家寨三官庙",
+            "url": "https://www.720yun.com/vr/60fjtpykkk6",
+            "longitude": 112.5601965341512,
+            "latitude": 37.70170154753853
+          }
+        ]
+      },
+      {
+        "district": "阳曲县",
+        "projects": [
+          {
+            "id": "太原市-阳曲县-29",
+            "name": "帖木儿塔",
+            "url": "https://www.720yun.com/vr/d9ajtpwyuu4",
+            "longitude": 112.90307839985152,
+            "latitude": 38.291572803942806
+          },
+          {
+            "id": "太原市-阳曲县-30",
+            "name": "前斧柯悬泉寺",
+            "url": "https://www.720yun.com/vr/ddbjtphntv4",
+            "longitude": 112.38275101286543,
+            "latitude": 37.98931355267562
+          },
+          {
+            "id": "太原市-阳曲县-31",
+            "name": "不二寺",
+            "url": "https://www.720yun.com/vr/4c7jtpwusn2",
+            "longitude": 112.67316743508604,
+            "latitude": 38.05828330378952
+          },
+          {
+            "id": "太原市-阳曲县-32",
+            "name": "阳曲轩辕庙",
+            "url": "https://www.720yun.com/vr/5c0jtpwyvv8",
+            "longitude": 112.67940895159992,
+            "latitude": 38.06462081944815
+          },
+          {
+            "id": "太原市-阳曲县-33",
+            "name": "明泰大师塔",
+            "url": "https://www.720yun.com/vr/38fjtpwazw8",
+            "longitude": 112.67940895159992,
+            "latitude": 38.06462081944815
+          },
+          {
+            "id": "太原市-阳曲县-34",
+            "name": "小屯庄圣母庙",
+            "url": "https://www.720yun.com/vr/bf5jtpwa5m5",
+            "longitude": 112.79751887869622,
+            "latitude": 38.07758775059249
+          }
+        ]
+      },
+      {
+        "district": "迎泽区",
+        "projects": [
+          {
+            "id": "太原市-迎泽区-35",
+            "name": "太原清真寺",
+            "url": "https://www.720yun.com/vr/714jtpymuk7",
+            "longitude": 112.56712354759976,
+            "latitude": 37.87025972148581
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "吕梁市",
+    "districts": [
+      {
+        "district": "方山县",
+        "projects": [
+          {
+            "id": "吕梁市-方山县-36",
+            "name": "大武鼓楼",
+            "url": "https://www.720yun.com/vr/58djt0sv5n7",
+            "longitude": 111.17463304775652,
+            "latitude": 37.65208328828803
+          },
+          {
+            "id": "吕梁市-方山县-37",
+            "name": "于成龙故居",
+            "url": "https://www.720yun.com/vr/9bdjt0svtu4",
+            "longitude": 111.29284825625861,
+            "latitude": 37.74781279354565
+          },
+          {
+            "id": "吕梁市-方山县-38",
+            "name": "赵庄诸神庙",
+            "url": "https://www.720yun.com/vr/143jtstavy8",
+            "longitude": 111.27758119479434,
+            "latitude": 37.931962330811736
+          },
+          {
+            "id": "吕梁市-方山县-39",
+            "name": "杨家会老爷庙",
+            "url": "https://www.720yun.com/vr/c94jt0sv5w6",
+            "longitude": 111.1983087877775,
+            "latitude": 37.700510602205384
+          },
+          {
+            "id": "吕梁市-方山县-40",
+            "name": "武当真武行宫",
+            "url": "https://www.720yun.com/vr/3c8jtstavO5",
+            "longitude": 111.34282359686465,
+            "latitude": 37.753727829631096
+          }
+        ]
+      },
+      {
+        "district": "汾阳市",
+        "projects": [
+          {
+            "id": "吕梁市-汾阳市-41",
+            "name": "杏花村汾酒作坊",
+            "url": "https://www.720yun.com/vr/0e8jt0kmvu7",
+            "longitude": 111.91563511208508,
+            "latitude": 37.34070649516494
+          },
+          {
+            "id": "吕梁市-汾阳市-42",
+            "name": "柏草坡龙天土地庙",
+            "url": "https://www.720yun.com/vr/5abjtphu5f4",
+            "longitude": 111.77360735163285,
+            "latitude": 37.34993063221901
+          },
+          {
+            "id": "吕梁市-汾阳市-43",
+            "name": "峪口圣母庙",
+            "url": "https://www.720yun.com/vr/f26jtpwukv1",
+            "longitude": 111.812518,
+            "latitude": 37.326055
+          },
+          {
+            "id": "吕梁市-汾阳市-44",
+            "name": "汾阳关帝庙",
+            "url": "https://www.720yun.com/vr/8fajt04kua1",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-45",
+            "name": "汾阳后土圣母庙",
+            "url": "https://www.720yun.com/vr/bdfjt04kun4",
+            "longitude": 111.7735225515927,
+            "latitude": 37.301153816595686
+          },
+          {
+            "id": "吕梁市-汾阳市-46",
+            "name": "法云寺",
+            "url": "https://www.720yun.com/vr/be0jtphnek1",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-47",
+            "name": "堡城寺龙王庙",
+            "url": "https://www.720yun.com/vr/cf2jtpwuOw8",
+            "longitude": 111.79875703133459,
+            "latitude": 37.306759230494954
+          },
+          {
+            "id": "吕梁市-汾阳市-48",
+            "name": "虞城五岳庙",
+            "url": "https://www.720yun.com/vr/b6cjtphfky5",
+            "longitude": 111.8361947219379,
+            "latitude": 37.196608680909776
+          },
+          {
+            "id": "吕梁市-汾阳市-49",
+            "name": "齐圣广佑王庙",
+            "url": "https://www.720yun.com/vr/d1cjtphney0",
+            "longitude": 111.72658698700187,
+            "latitude": 37.23915595944021
+          },
+          {
+            "id": "吕梁市-汾阳市-50",
+            "name": "报恩寺",
+            "url": "https://www.720yun.com/vr/4a3jt04nzn2",
+            "longitude": 111.78987296950203,
+            "latitude": 37.2752819753176
+          },
+          {
+            "id": "吕梁市-汾阳市-51",
+            "name": "禅定寺",
+            "url": "https://www.720yun.com/vr/35bjtphu5O3",
+            "longitude": 111.85417700163663,
+            "latitude": 37.18947405187748
+          },
+          {
+            "id": "吕梁市-汾阳市-52",
+            "name": "演武寿圣寺",
+            "url": "https://www.720yun.com/vr/00djt04uOv7",
+            "longitude": 111.93323794753641,
+            "latitude": 37.23399849648817
+          },
+          {
+            "id": "吕梁市-汾阳市-53",
+            "name": "石家庄龙天庙",
+            "url": "https://www.720yun.com/vr/17fjt04kuu0",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-54",
+            "name": "蔚光年宅院",
+            "url": "https://www.720yun.com/vr/bf5jt04kvy6",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-55",
+            "name": "后沟玲珑塔",
+            "url": "https://www.720yun.com/vr/4b4jtpwatk2",
+            "longitude": 111.7534269183512,
+            "latitude": 37.383255347097666
+          },
+          {
+            "id": "吕梁市-汾阳市-56",
+            "name": "岅峪东岳庙",
+            "url": "https://www.720yun.com/vr/eb7jtphnev6",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-57",
+            "name": "刘家堡关帝庙",
+            "url": "https://www.720yun.com/vr/6b1jt04nzf3",
+            "longitude": 111.79096270391616,
+            "latitude": 37.270156513926196
+          },
+          {
+            "id": "吕梁市-汾阳市-58",
+            "name": "汾阳南薰楼",
+            "url": "https://www.720yun.com/vr/c00jt04Oua3",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-59",
+            "name": "药师七佛多宝塔",
+            "url": "https://www.720yun.com/vr/728jt0kmeO0",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-60",
+            "name": "东石龙天庙",
+            "url": "https://www.720yun.com/vr/d4fjt04usw8",
+            "longitude": 111.66406716927118,
+            "latitude": 37.2208304982701
+          },
+          {
+            "id": "吕梁市-汾阳市-61",
+            "name": "南赵郡佛殿",
+            "url": "https://www.720yun.com/vr/972jtpwata2",
+            "longitude": 111.644924189023,
+            "latitude": 37.30357261180835
+          },
+          {
+            "id": "吕梁市-汾阳市-62",
+            "name": "贺虏龙王摩西神庙",
+            "url": "https://www.720yun.com/vr/8a4jtphfkf4",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-63",
+            "name": "普会河神庙",
+            "url": "https://www.720yun.com/vr/250jtphu5m1",
+            "longitude": 111.84899925850766,
+            "latitude": 37.19161193184705
+          },
+          {
+            "id": "吕梁市-汾阳市-64",
+            "name": "西贾壁玄天上帝庙",
+            "url": "https://www.720yun.com/vr/b71jtphfka8",
+            "longitude": 111.79459661919569,
+            "latitude": 37.271291794517566
+          },
+          {
+            "id": "吕梁市-汾阳市-65",
+            "name": "牧庄龙天庙",
+            "url": "https://www.720yun.com/vr/9e0jtpwuku0",
+            "longitude": 111.75272938412269,
+            "latitude": 37.2414257222087
+          }
+        ]
+      },
+      {
+        "district": "交城县",
+        "projects": [
+          {
+            "id": "吕梁市-交城县-66",
+            "name": "交城玄中寺",
+            "url": "https://www.720yun.com/vr/e0djt0evOn4",
+            "longitude": 112.09191148874962,
+            "latitude": 37.57104670411525
+          },
+          {
+            "id": "吕梁市-交城县-67",
+            "name": "卦山天宁寺",
+            "url": "https://www.720yun.com/vr/537jt0tOef7",
+            "longitude": 112.14318703675082,
+            "latitude": 37.575005005567476
+          },
+          {
+            "id": "吕梁市-交城县-68",
+            "name": "永福寺",
+            "url": "https://www.720yun.com/vr/4f1jt0mntf5",
+            "longitude": 112.1976305489635,
+            "latitude": 37.55434648443499
+          },
+          {
+            "id": "吕梁市-交城县-69",
+            "name": "交城广生院",
+            "url": "https://www.720yun.com/vr/08ejt0uytn5",
+            "longitude": 112.16298649866569,
+            "latitude": 37.55855706150587
+          },
+          {
+            "id": "吕梁市-交城县-70",
+            "name": "交城弥陀寺",
+            "url": "https://www.720yun.com/vr/becjt0uytm8",
+            "longitude": 112.16298649866569,
+            "latitude": 37.55855706150587
+          },
+          {
+            "id": "吕梁市-交城县-71",
+            "name": "贺家寨关帝庙",
+            "url": "https://www.720yun.com/vr/6c0jt0kksy8",
+            "longitude": 112.2333323539993,
+            "latitude": 37.54111279405523
+          },
+          {
+            "id": "吕梁市-交城县-72",
+            "name": "郑村关帝庙",
+            "url": "https://www.720yun.com/vr/35bjt0kksn5",
+            "longitude": 112.28962359081547,
+            "latitude": 37.55614570337494
+          }
+        ]
+      },
+      {
+        "district": "交口县",
+        "projects": [
+          {
+            "id": "吕梁市-交口县-73",
+            "name": "韩极石牌坊及墓碑楼",
+            "url": "https://www.720yun.com/vr/dc5jtphkvn8",
+            "longitude": 111.18762820475553,
+            "latitude": 36.98787266655283
+          }
+        ]
+      },
+      {
+        "district": "离石区",
+        "projects": [
+          {
+            "id": "吕梁市-离石区-74",
+            "name": "安国寺",
+            "url": "https://www.720yun.com/vr/898jt0yyzn2",
+            "longitude": 111.06378286646965,
+            "latitude": 37.53139922253879
+          },
+          {
+            "id": "吕梁市-离石区-75",
+            "name": "天贞观",
+            "url": "https://www.720yun.com/vr/739jt0sv5k5",
+            "longitude": 111.1528793222047,
+            "latitude": 37.53213560778137
+          },
+          {
+            "id": "吕梁市-离石区-76",
+            "name": "离石文庙",
+            "url": "https://www.720yun.com/vr/4f6jt0ynty7",
+            "longitude": 111.1442270231937,
+            "latitude": 37.521140004723875
+          },
+          {
+            "id": "吕梁市-离石区-77",
+            "name": "石盘圣母庙",
+            "url": "https://www.720yun.com/vr/a9djt0yy5v5",
+            "longitude": 111.1097825763802,
+            "latitude": 37.51132290729496
+          }
+        ]
+      },
+      {
+        "district": "临县",
+        "projects": [
+          {
+            "id": "吕梁市-临县-78",
+            "name": "善庆寺",
+            "url": "https://www.720yun.com/vr/154jtsuuua4",
+            "longitude": 111.00100002488564,
+            "latitude": 37.854300000156655
+          },
+          {
+            "id": "吕梁市-临县-79",
+            "name": "宿皇寺",
+            "url": "https://www.720yun.com/vr/5d0jtsuuuy6",
+            "longitude": 110.59204608214598,
+            "latitude": 38.164478400018446
+          }
+        ]
+      },
+      {
+        "district": "柳林县",
+        "projects": [
+          {
+            "id": "吕梁市-柳林县-80",
+            "name": "玉虚宫下院",
+            "url": "https://www.720yun.com/vr/e38jt0wwvO1",
+            "longitude": 110.91685404098554,
+            "latitude": 37.443019956226564
+          },
+          {
+            "id": "吕梁市-柳林县-81",
+            "name": "南山寺",
+            "url": "https://www.720yun.com/vr/da9jt0hmkm8",
+            "longitude": 110.80234299525385,
+            "latitude": 37.55033057159236
+          },
+          {
+            "id": "吕梁市-柳林县-82",
+            "name": "柳林双塔寺",
+            "url": "https://www.720yun.com/vr/7c3jt0wfev0",
+            "longitude": 110.8955447071695,
+            "latitude": 37.43900860235398
+          },
+          {
+            "id": "吕梁市-柳林县-83",
+            "name": "薛村观音庙",
+            "url": "https://www.720yun.com/vr/a84jt0wuzm0",
+            "longitude": 110.85792546902263,
+            "latitude": 37.426839839038074
+          },
+          {
+            "id": "吕梁市-柳林县-84",
+            "name": "柳溪寺舍利塔",
+            "url": "https://www.720yun.com/vr/183jt0haza2",
+            "longitude": 110.89538983929958,
+            "latitude": 37.43549296493386
+          }
+        ]
+      },
+      {
+        "district": "石楼县",
+        "projects": [
+          {
+            "id": "吕梁市-石楼县-85",
+            "name": "后土圣母庙",
+            "url": "https://www.720yun.com/vr/f76jt0turu2",
+            "longitude": 110.84159553247896,
+            "latitude": 37.00447050301227
+          },
+          {
+            "id": "吕梁市-石楼县-86",
+            "name": "兴东垣东岳庙",
+            "url": "https://www.720yun.com/vr/6b8jtpynsk5",
+            "longitude": 110.95830131823261,
+            "latitude": 37.055271342904526
+          },
+          {
+            "id": "吕梁市-石楼县-87",
+            "name": "下河仁泉寺",
+            "url": "https://www.720yun.com/vr/463jt0tuuO4",
+            "longitude": 110.84159553247896,
+            "latitude": 37.00447050301227
+          },
+          {
+            "id": "吕梁市-石楼县-88",
+            "name": "王家洼圣母庙",
+            "url": "https://www.720yun.com/vr/af1jtpsvtO9",
+            "longitude": 110.55180891225139,
+            "latitude": 37.105141731879144
+          }
+        ]
+      },
+      {
+        "district": "文水县",
+        "projects": [
+          {
+            "id": "吕梁市-文水县-89",
+            "name": "则天庙",
+            "url": "https://www.720yun.com/vr/11bjtpwyry1",
+            "longitude": 112.05126199662597,
+            "latitude": 37.48373902095297
+          },
+          {
+            "id": "吕梁市-文水县-90",
+            "name": "上贤梵安寺塔",
+            "url": "https://www.720yun.com/vr/ed0jtpwatf3",
+            "longitude": 111.99074863408235,
+            "latitude": 37.36922246613581
+          },
+          {
+            "id": "吕梁市-文水县-91",
+            "name": "开栅能仁寺",
+            "url": "https://www.720yun.com/vr/a27jtpwOef3",
+            "longitude": 112.07827799585523,
+            "latitude": 37.5163730875863
+          },
+          {
+            "id": "吕梁市-文水县-92",
+            "name": "麻家堡关帝庙",
+            "url": "https://www.720yun.com/vr/f4ejtpynzu8",
+            "longitude": 112.25356560764496,
+            "latitude": 37.448160383868895
+          },
+          {
+            "id": "吕梁市-文水县-93",
+            "name": "石永市楼",
+            "url": "https://www.720yun.com/vr/894jtpynzf0",
+            "longitude": 112.03559869260123,
+            "latitude": 37.44430008265076
+          },
+          {
+            "id": "吕梁市-文水县-94",
+            "name": "九天神庙",
+            "url": "https://www.720yun.com/vr/ee6jtpwOeO8",
+            "longitude": 112.03559869260123,
+            "latitude": 37.44430008265076
+          },
+          {
+            "id": "吕梁市-文水县-95",
+            "name": "东旧关帝庙",
+            "url": "https://www.720yun.com/vr/d09jtpwOey9",
+            "longitude": 112.01108860642258,
+            "latitude": 37.39480553579211
+          },
+          {
+            "id": "吕梁市-文水县-96",
+            "name": "马村关帝庙",
+            "url": "https://www.720yun.com/vr/e20jtpynzk7",
+            "longitude": 112.01108860642258,
+            "latitude": 37.39480553579211
+          }
+        ]
+      },
+      {
+        "district": "孝义市",
+        "projects": [
+          {
+            "id": "吕梁市-孝义市-97",
+            "name": "孝义慈胜寺",
+            "url": "https://www.720yun.com/vr/3bejtphnea7",
+            "longitude": 111.75569783468042,
+            "latitude": 37.1696538196849
+          },
+          {
+            "id": "吕梁市-孝义市-98",
+            "name": "孝义天齐庙",
+            "url": "https://www.720yun.com/vr/3ccjtpwOtO4",
+            "longitude": 111.83523272656726,
+            "latitude": 37.079721444446704
+          },
+          {
+            "id": "吕梁市-孝义市-99",
+            "name": "中阳楼",
+            "url": "https://www.720yun.com/vr/208jtpwOeu1",
+            "longitude": 111.8099912400424,
+            "latitude": 37.14206846645942
+          },
+          {
+            "id": "吕梁市-孝义市-100",
+            "name": "临黄塔",
+            "url": "https://www.720yun.com/vr/aecjtpwakf7",
+            "longitude": 111.85050697447562,
+            "latitude": 37.12254797051886
+          },
+          {
+            "id": "吕梁市-孝义市-101",
+            "name": "寂照寺",
+            "url": "https://www.720yun.com/vr/740jtpwakf5",
+            "longitude": 111.671906232304,
+            "latitude": 37.14390248883805
+          },
+          {
+            "id": "吕梁市-孝义市-102",
+            "name": "小垣西庙",
+            "url": "https://www.720yun.com/vr/c9ejtphOey5",
+            "longitude": 111.73943293545565,
+            "latitude": 37.14666429721301
+          },
+          {
+            "id": "吕梁市-孝义市-103",
+            "name": "东董屯龙天庙",
+            "url": "https://www.720yun.com/vr/5bajtpykku2",
+            "longitude": 111.85617636021018,
+            "latitude": 37.06762113661372
+          },
+          {
+            "id": "吕梁市-孝义市-104",
+            "name": "宋家庄东岳庙",
+            "url": "https://www.720yun.com/vr/699jtphnea5",
+            "longitude": 111.74435915304183,
+            "latitude": 37.17017078769216
+          },
+          {
+            "id": "吕梁市-孝义市-105",
+            "name": "静安寺",
+            "url": "https://www.720yun.com/vr/0b4jtpwazu9",
+            "longitude": 111.672410002034,
+            "latitude": 37.155933920962624
+          },
+          {
+            "id": "吕梁市-孝义市-106",
+            "name": "王家沟夫子庙",
+            "url": "https://www.720yun.com/vr/950jtpykku1",
+            "longitude": 111.82707,
+            "latitude": 37.047410
+          },
+          {
+            "id": "吕梁市-孝义市-107",
+            "name": "南姚龙天庙",
+            "url": "https://www.720yun.com/vr/c71jtpwOtO8",
+            "longitude": 111.85617636021018,
+            "latitude": 37.06762113661372
+          },
+          {
+            "id": "吕梁市-孝义市-108",
+            "name": "寿神寺",
+            "url": "https://www.720yun.com/vr/e7ajtpykku4",
+            "longitude": 111.78560601832963,
+            "latitude": 37.15106331910215
+          },
+          {
+            "id": "吕梁市-孝义市-109",
+            "name": "司马关帝庙",
+            "url": "https://www.720yun.com/vr/126jtpwyua7",
+            "longitude": 111.68315598169711,
+            "latitude": 37.14551094319575
+          },
+          {
+            "id": "吕梁市-孝义市-110",
+            "name": "宜兴龙天庙",
+            "url": "https://www.720yun.com/vr/89cjtpwyua3",
+            "longitude": 111.85617636021018,
+            "latitude": 37.06762113661372
+          },
+          {
+            "id": "吕梁市-孝义市-111",
+            "name": "赵家庄龙天庙",
+            "url": "https://www.720yun.com/vr/d89jtpwyua0",
+            "longitude": 111.85617636021018,
+            "latitude": 37.06762113661372
+          }
+        ]
+      },
+      {
+        "district": "兴县",
+        "projects": [
+          {
+            "id": "吕梁市-兴县-112",
+            "name": "胡家沟砖塔",
+            "url": "https://www.720yun.com/vr/abajtstaum1",
+            "longitude": 111.05498423349108,
+            "latitude": 38.47583725697476
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "晋中市",
+    "districts": [
+      {
+        "district": "和顺县",
+        "projects": [
+          {
+            "id": "晋中市-和顺县-113",
+            "name": "懿济圣母庙",
+            "url": "https://www.720yun.com/vr/c12jtstktn2",
+            "longitude": 113.71829181795368,
+            "latitude": 37.27898939293697
+          },
+          {
+            "id": "晋中市-和顺县-114",
+            "name": "荣华寺",
+            "url": "https://www.720yun.com/vr/f87jt0sOkm9",
+            "longitude": 113.52407169889678,
+            "latitude": 37.272277298552616
+          },
+          {
+            "id": "晋中市-和顺县-115",
+            "name": "石牌坊",
+            "url": "https://www.720yun.com/vr/c35jtpkv5u3",
+            "longitude": 113.57993695924011,
+            "latitude": 37.33837906848209
+          },
+          {
+            "id": "晋中市-和顺县-116",
+            "name": "大佛头香山寺",
+            "url": "https://www.720yun.com/vr/fcbjtstn5f7",
+            "longitude": 113.43037780539221,
+            "latitude": 37.259010994381235
+          },
+          {
+            "id": "晋中市-和顺县-117",
+            "name": "邢村昭懿圣母庙",
+            "url": "https://www.720yun.com/vr/a14jt0sOzu9",
+            "longitude": 113.6239647987257,
+            "latitude": 37.32181420821168
+          }
+        ]
+      },
+      {
+        "district": "介休市",
+        "projects": [
+          {
+            "id": "晋中市-介休市-118",
+            "name": "云峰寺石佛殿",
+            "url": "https://www.720yun.com/vr/5a3jtstnzv4",
+            "longitude": 111.9832762593587,
+            "latitude": 36.879851795571625
+          },
+          {
+            "id": "晋中市-介休市-119",
+            "name": "介休源神庙",
+            "url": "https://www.720yun.com/vr/b1cjt5hm5w4",
+            "longitude": 112.04596909073061,
+            "latitude": 37.03533923166063
+          },
+          {
+            "id": "晋中市-介休市-120",
+            "name": "介休城隍庙",
+            "url": "https://www.720yun.com/vr/2a3jtstktm7",
+            "longitude": 111.93211704192105,
+            "latitude": 37.03537092041383
+          },
+          {
+            "id": "晋中市-介休市-121",
+            "name": "回銮寺",
+            "url": "https://www.720yun.com/vr/6f6jtstOvy0",
+            "longitude": 111.93784814124416,
+            "latitude": 36.8999755845371
+          },
+          {
+            "id": "晋中市-介休市-122",
+            "name": "太和岩牌楼",
+            "url": "https://www.720yun.com/vr/523jt5wnrk0",
+            "longitude": 112.01594637312888,
+            "latitude": 37.132768861372085
+          },
+          {
+            "id": "晋中市-介休市-123",
+            "name": "介休五岳庙",
+            "url": "https://www.720yun.com/vr/2b6jt0sOku4",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-124",
+            "name": "介休东岳庙",
+            "url": "https://www.720yun.com/vr/cc4jtstnzv6",
+            "longitude": 111.94616231806121,
+            "latitude": 36.94575424428538
+          },
+          {
+            "id": "晋中市-介休市-125",
+            "name": "师屯北广济寺",
+            "url": "https://www.720yun.com/vr/677jt5ymeO8",
+            "longitude": 111.85032946930684,
+            "latitude": 37.0197182937699
+          },
+          {
+            "id": "晋中市-介休市-126",
+            "name": "介休龙泉观",
+            "url": "https://www.720yun.com/vr/867jt0sOku5",
+            "longitude": 111.93272618288736,
+            "latitude": 37.036129646010394
+          },
+          {
+            "id": "晋中市-介休市-127",
+            "name": "渠池棲云庵",
+            "url": "https://www.720yun.com/vr/a73jt5yara4",
+            "longitude": 111.96688263295437,
+            "latitude": 36.95738786228506
+          },
+          {
+            "id": "晋中市-介休市-128",
+            "name": "龙头古龙寺",
+            "url": "https://www.720yun.com/vr/37ejt5yutO9",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-129",
+            "name": "龙凤三明寺",
+            "url": "https://www.720yun.com/vr/a9djt0ynek1",
+            "longitude": 111.9888072162142,
+            "latitude": 36.98877203603183
+          },
+          {
+            "id": "晋中市-介休市-130",
+            "name": "洪山关帝庙",
+            "url": "https://www.720yun.com/vr/998jt0ykkk5",
+            "longitude": 112.07023816154093,
+            "latitude": 37.07420201246197
+          },
+          {
+            "id": "晋中市-介休市-131",
+            "name": "介休文庙",
+            "url": "https://www.720yun.com/vr/dccjt0syek0",
+            "longitude": 111.91347576530019,
+            "latitude": 37.02891665438906
+          },
+          {
+            "id": "晋中市-介休市-132",
+            "name": "板峪三皇庙",
+            "url": "https://www.720yun.com/vr/954jt0ynek0",
+            "longitude": 112.13302854889125,
+            "latitude": 37.04448642864067
+          },
+          {
+            "id": "晋中市-介休市-133",
+            "name": "师屯南弘济寺塔",
+            "url": "https://www.720yun.com/vr/ab8jt0sv5f0",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-134",
+            "name": "介休马王庙",
+            "url": "https://www.720yun.com/vr/304jtpkOem1",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-135",
+            "name": "介休关帝庙",
+            "url": "https://www.720yun.com/vr/4eajt0sOku6",
+            "longitude": 111.96564288152005,
+            "latitude": 36.891362932859806
+          },
+          {
+            "id": "晋中市-介休市-136",
+            "name": "西刘屯镇河楼",
+            "url": "https://www.720yun.com/vr/fcejt0syea9",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-137",
+            "name": "石屯环翠桥",
+            "url": "https://www.720yun.com/vr/cb4jt0yy5m3",
+            "longitude": 111.92356319719394,
+            "latitude": 37.03268640360337
+          },
+          {
+            "id": "晋中市-介休市-138",
+            "name": "龙凤凌空塔",
+            "url": "https://www.720yun.com/vr/482jt0ynek3",
+            "longitude": 111.98270664383482,
+            "latitude": 36.999003482342694
+          },
+          {
+            "id": "晋中市-介休市-139",
+            "name": "下李侯村观音阁",
+            "url": "https://www.720yun.com/vr/a5djt5yOvv3",
+            "longitude": 112.0763938898786,
+            "latitude": 37.08348411438739
+          },
+          {
+            "id": "晋中市-介休市-140",
+            "name": "席村关帝庙",
+            "url": "https://www.720yun.com/vr/44bjt5wfkw1",
+            "longitude": 111.98263873193828,
+            "latitude": 37.0983778376844
+          },
+          {
+            "id": "晋中市-介休市-141",
+            "name": "鳌子岭五岳庙",
+            "url": "https://www.720yun.com/vr/73djts4fuO6",
+            "longitude": 112.00132177976535,
+            "latitude": 37.01620168644313
+          },
+          {
+            "id": "晋中市-介休市-142",
+            "name": "大靳大兴寺",
+            "url": "https://www.720yun.com/vr/56djts4frv0",
+            "longitude": 111.94762547807586,
+            "latitude": 36.950055071901076
+          }
+        ]
+      },
+      {
+        "district": "灵石县",
+        "projects": [
+          {
+            "id": "晋中市-灵石县-143",
+            "name": "静升文庙",
+            "url": "https://www.720yun.com/vr/0f3jtphkvn1",
+            "longitude": 111.88247838622013,
+            "latitude": 36.901308745723426
+          },
+          {
+            "id": "晋中市-灵石县-144",
+            "name": "资寿寺",
+            "url": "https://www.720yun.com/vr/ac4jtp4k5k1",
+            "longitude": 111.84228083159854,
+            "latitude": 36.8969316206694
+          },
+          {
+            "id": "晋中市-灵石县-145",
+            "name": "晋祠庙",
+            "url": "https://www.720yun.com/vr/b15jtpkOem5",
+            "longitude": 111.89211495857842,
+            "latitude": 36.8782099469465
+          },
+          {
+            "id": "晋中市-灵石县-146",
+            "name": "灵石后土庙",
+            "url": "https://www.720yun.com/vr/7adjtstOvy2",
+            "longitude": 111.77879398798636,
+            "latitude": 36.84787495558405
+          },
+          {
+            "id": "晋中市-灵石县-147",
+            "name": "夏门古堡",
+            "url": "https://www.720yun.com/vr/e4djtsevvk7",
+            "longitude": 111.71429241847012,
+            "latitude": 36.820593897332294
+          },
+          {
+            "id": "晋中市-灵石县-148",
+            "name": "南浦村天齐庙",
+            "url": "https://www.720yun.com/vr/b79jtp4nsv3",
+            "longitude": 111.84035522390735,
+            "latitude": 36.88989646353454
+          }
+        ]
+      },
+      {
+        "district": "平遥县",
+        "projects": [
+          {
+            "id": "晋中市-平遥县-149",
+            "name": "北依涧永福寺过殿",
+            "url": "https://www.720yun.com/vr/e91jt5snuf5",
+            "longitude": 112.3404493572478,
+            "latitude": 37.228209969027574
+          },
+          {
+            "id": "晋中市-平遥县-150",
+            "name": "梁家滩白云寺",
+            "url": "https://www.720yun.com/vr/90fjtpevzu1",
+            "longitude": 112.25843774723941,
+            "latitude": 37.08421147836371
+          },
+          {
+            "id": "晋中市-平遥县-151",
+            "name": "平遥惠济桥",
+            "url": "https://www.720yun.com/vr/aa3jt04usn2",
+            "longitude": 112.17671781703011,
+            "latitude": 37.19996198682012
+          },
+          {
+            "id": "晋中市-平遥县-152",
+            "name": "南政隆福寺",
+            "url": "https://www.720yun.com/vr/902jt0mvsu1",
+            "longitude": 112.17416869548445,
+            "latitude": 37.24241140494223
+          },
+          {
+            "id": "晋中市-平遥县-153",
+            "name": "干坑南神庙",
+            "url": "https://www.720yun.com/vr/ceajt0kkOO4",
+            "longitude": 112.1975231116245,
+            "latitude": 37.1929801113661
+          },
+          {
+            "id": "晋中市-平遥县-154",
+            "name": "襄垣慈胜寺",
+            "url": "https://www.720yun.com/vr/cb9jtptvuy3",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-155",
+            "name": "雷履泰旧居",
+            "url": "https://www.720yun.com/vr/5b2jt0wuew3",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-156",
+            "name": "平遥市楼",
+            "url": "https://www.720yun.com/vr/09djt0hmtu9",
+            "longitude": 112.1919333157581,
+            "latitude": 37.21063361474577
+          },
+          {
+            "id": "晋中市-平遥县-157",
+            "name": "平遥城墙",
+            "url": "https://www.720yun.com/vr/fe2jt0ynea6",
+            "longitude": 112.18859871587453,
+            "latitude": 37.216822320726735
+          },
+          {
+            "id": "晋中市-平遥县-158",
+            "name": "双林寺",
+            "url": "https://www.720yun.com/vr/9bdjt04kry9",
+            "longitude": 112.13815050724803,
+            "latitude": 37.17716557272545
+          },
+          {
+            "id": "晋中市-平遥县-159",
+            "name": "慈相寺",
+            "url": "https://www.720yun.com/vr/52ejt0tmsn0",
+            "longitude": 112.29598000060408,
+            "latitude": 37.24613596742157
+          },
+          {
+            "id": "晋中市-平遥县-160",
+            "name": "平遥文庙",
+            "url": "https://www.720yun.com/vr/4fcjtpmmua7",
+            "longitude": 112.19657306371715,
+            "latitude": 37.20845323756881
+          },
+          {
+            "id": "晋中市-平遥县-161",
+            "name": "清虚观",
+            "url": "https://www.720yun.com/vr/3dejt04usn8",
+            "longitude": 112.19720556062673,
+            "latitude": 37.21297235699532
+          },
+          {
+            "id": "晋中市-平遥县-162",
+            "name": "平遥城隍庙",
+            "url": "https://www.720yun.com/vr/c8djt0hmtu7",
+            "longitude": 112.19621499914088,
+            "latitude": 37.2092949303274
+          },
+          {
+            "id": "晋中市-平遥县-163",
+            "name": "日升昌旧址",
+            "url": "https://www.720yun.com/vr/2b8jt04nek9",
+            "longitude": 112.1900950233625,
+            "latitude": 37.211499927889015
+          },
+          {
+            "id": "晋中市-平遥县-164",
+            "name": "金庄文庙",
+            "url": "https://www.720yun.com/vr/f3fjt0ukka6",
+            "longitude": 112.24264984824046,
+            "latitude": 37.2034902624515
+          },
+          {
+            "id": "晋中市-平遥县-165",
+            "name": "利应侯庙",
+            "url": "https://www.720yun.com/vr/272jt5snry8",
+            "longitude": 112.2823120127781,
+            "latitude": 37.291722959517585
+          },
+          {
+            "id": "晋中市-平遥县-166",
+            "name": "长则普明寺",
+            "url": "https://www.720yun.com/vr/573jtptvuv0",
+            "longitude": 112.33095004597146,
+            "latitude": 37.24032762300827
+          },
+          {
+            "id": "晋中市-平遥县-167",
+            "name": "北常普音寺",
+            "url": "https://www.720yun.com/vr/036jt0un5a6",
+            "longitude": 112.18280536397958,
+            "latitude": 37.104482566810795
+          },
+          {
+            "id": "晋中市-平遥县-168",
+            "name": "东卜宜先师庙",
+            "url": "https://www.720yun.com/vr/c7fjtptfkO8",
+            "longitude": 112.23220246532887,
+            "latitude": 37.10772062992679
+          },
+          {
+            "id": "晋中市-平遥县-169",
+            "name": "杜村玉皇庙",
+            "url": "https://www.720yun.com/vr/78djt0eOtw8",
+            "longitude": 112.12966125068708,
+            "latitude": 37.15802314570732
+          },
+          {
+            "id": "晋中市-平遥县-170",
+            "name": "梁村积福寺",
+            "url": "https://www.720yun.com/vr/afejt0euum8",
+            "longitude": 112.2448461153818,
+            "latitude": 37.16609511959159
+          },
+          {
+            "id": "晋中市-平遥县-171",
+            "name": "庞庄普恩寺",
+            "url": "https://www.720yun.com/vr/ac0jt0ukka9",
+            "longitude": 112.25893864239178,
+            "latitude": 37.22155997928252
+          },
+          {
+            "id": "晋中市-平遥县-172",
+            "name": "赵壁子夏庙",
+            "url": "https://www.720yun.com/vr/c2ajt0uyty5",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-173",
+            "name": "七洞关帝庙",
+            "url": "https://www.720yun.com/vr/179jt0un5a8",
+            "longitude": 112.22331463061313,
+            "latitude": 37.20555416082496
+          },
+          {
+            "id": "晋中市-平遥县-174",
+            "name": "岳封五岳庙",
+            "url": "https://www.720yun.com/vr/2d4jt0murO9",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-175",
+            "name": "梁官洪济寺",
+            "url": "https://www.720yun.com/vr/452jt0tOrm0",
+            "longitude": 112.29351864350673,
+            "latitude": 37.29883441217037
+          },
+          {
+            "id": "晋中市-平遥县-176",
+            "name": "平遥鸣凤书院",
+            "url": "https://www.720yun.com/vr/d75jt0euuw6",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-177",
+            "name": "西赵观音堂",
+            "url": "https://www.720yun.com/vr/a72jt0uyty4",
+            "longitude": 112.26102693321083,
+            "latitude": 37.16861146157927
+          },
+          {
+            "id": "晋中市-平遥县-178",
+            "name": "新庄三圣庙",
+            "url": "https://www.720yun.com/vr/154jtptvuf7",
+            "longitude": 112.19384347259454,
+            "latitude": 37.236685443771606
+          },
+          {
+            "id": "晋中市-平遥县-179",
+            "name": "西卜宜文祠庙",
+            "url": "https://www.720yun.com/vr/406jtptmva6",
+            "longitude": 112.182455563814,
+            "latitude": 37.195600690703
+          },
+          {
+            "id": "晋中市-平遥县-180",
+            "name": "南石渠忠义祠",
+            "url": "https://www.720yun.com/vr/938jtptmvu5",
+            "longitude": 112.24520624606075,
+            "latitude": 37.102565551532464
+          },
+          {
+            "id": "晋中市-平遥县-181",
+            "name": "高林观音堂",
+            "url": "https://www.720yun.com/vr/c19jtptfkw3",
+            "longitude": 112.20049740116805,
+            "latitude": 37.16606628983601
+          },
+          {
+            "id": "晋中市-平遥县-182",
+            "name": "西良鹤龙天庙",
+            "url": "https://www.720yun.com/vr/ff9jtpumuw7",
+            "longitude": 112.35069327396141,
+            "latitude": 37.044732850418114
+          },
+          {
+            "id": "晋中市-平遥县-183",
+            "name": "钦贤慈云寺",
+            "url": "https://www.720yun.com/vr/a4djtptfzu5",
+            "longitude": 112.28137076826475,
+            "latitude": 37.251549323126504
+          },
+          {
+            "id": "晋中市-平遥县-184",
+            "name": "沿村堡佛堂",
+            "url": "https://www.720yun.com/vr/467jtptmtn7",
+            "longitude": 112.25454655726185,
+            "latitude": 37.2428841315848
+          },
+          {
+            "id": "晋中市-平遥县-185",
+            "name": "吉祥寺",
+            "url": "https://www.720yun.com/vr/5b4jtpmuvu3",
+            "longitude": 112.18980325373286,
+            "latitude": 37.20942987045746
+          }
+        ]
+      },
+      {
+        "district": "祁县",
+        "projects": [
+          {
+            "id": "晋中市-祁县-186",
+            "name": "兴梵寺",
+            "url": "https://www.720yun.com/vr/a24jtpeyka4",
+            "longitude": 112.46343016631087,
+            "latitude": 37.39654011324112
+          },
+          {
+            "id": "晋中市-祁县-187",
+            "name": "渠家大院",
+            "url": "https://www.720yun.com/vr/034jt04nvf7",
+            "longitude": 112.33405045760858,
+            "latitude": 37.36350035552555
+          },
+          {
+            "id": "晋中市-祁县-188",
+            "name": "梁村洪福寺",
+            "url": "https://www.720yun.com/vr/60djtpeaOa0",
+            "longitude": 112.43326964864391,
+            "latitude": 37.31056202609306
+          },
+          {
+            "id": "晋中市-祁县-189",
+            "name": "祁县镇河楼",
+            "url": "https://www.720yun.com/vr/d2ajtpmwry8",
+            "longitude": 112.3657947777202,
+            "latitude": 37.41864563757753
+          },
+          {
+            "id": "晋中市-祁县-190",
+            "name": "聚全堂药铺旧址",
+            "url": "https://www.720yun.com/vr/3bdjt04nvv0",
+            "longitude": 112.34244242768281,
+            "latitude": 37.36413128347519
+          },
+          {
+            "id": "晋中市-祁县-191",
+            "name": "谷恋真武庙",
+            "url": "https://www.720yun.com/vr/ca3jt0kkkO9",
+            "longitude": 112.40038268392362,
+            "latitude": 37.39616318421014
+          },
+          {
+            "id": "晋中市-祁县-192",
+            "name": "张北延寿寺",
+            "url": "https://www.720yun.com/vr/be0jt0eOuO7",
+            "longitude": 112.44836522358635,
+            "latitude": 37.430112953623535
+          },
+          {
+            "id": "晋中市-祁县-193",
+            "name": "苗家堡关帝庙",
+            "url": "https://www.720yun.com/vr/16bjt0kkkm5",
+            "longitude": 112.30168334228692,
+            "latitude": 37.43384225273808
+          },
+          {
+            "id": "晋中市-祁县-194",
+            "name": "王贤关帝庙",
+            "url": "https://www.720yun.com/vr/f41jt0kmuw3",
+            "longitude": 112.34244242768281,
+            "latitude": 37.36413128347519
+          },
+          {
+            "id": "晋中市-祁县-195",
+            "name": "加乐茶壶庙",
+            "url": "https://www.720yun.com/vr/1eejtpeaOa2",
+            "longitude": 112.34244242768281,
+            "latitude": 37.36413128347519
+          },
+          {
+            "id": "晋中市-祁县-196",
+            "name": "涧壑真武庙",
+            "url": "https://www.720yun.com/vr/3a5jt04u5m6",
+            "longitude": 112.44050540969624,
+            "latitude": 37.31884907322864
+          },
+          {
+            "id": "晋中市-祁县-197",
+            "name": "罗家祠堂",
+            "url": "https://www.720yun.com/vr/d8cjtpmwry6",
+            "longitude": 112.34244242768281,
+            "latitude": 37.36413128347519
+          },
+          {
+            "id": "晋中市-祁县-198",
+            "name": "东高堡关帝庙",
+            "url": "https://www.720yun.com/vr/eb3jtpmwry4",
+            "longitude": 112.34244242768281,
+            "latitude": 37.36413128347519
+          }
+        ]
+      },
+      {
+        "district": "寿阳县",
+        "projects": [
+          {
+            "id": "晋中市-寿阳县-199",
+            "name": "普光寺",
+            "url": "https://www.720yun.com/vr/875jtpkOsw0",
+            "longitude": 112.96212330237796,
+            "latitude": 37.78032372609994
+          },
+          {
+            "id": "晋中市-寿阳县-200",
+            "name": "福田寺",
+            "url": "https://www.720yun.com/vr/e1cjtpkyzn3",
+            "longitude": 112.87083363374032,
+            "latitude": 37.94622300457724
+          },
+          {
+            "id": "晋中市-寿阳县-201",
+            "name": "孟家沟龙泉寺",
+            "url": "https://www.720yun.com/vr/3f1jtp4kzw6",
+            "longitude": 112.94521871979956,
+            "latitude": 37.90399779016029
+          },
+          {
+            "id": "晋中市-寿阳县-202",
+            "name": "松罗院",
+            "url": "https://www.720yun.com/vr/7cejtpkyka5",
+            "longitude": 113.18341017492547,
+            "latitude": 37.9013076069566
+          },
+          {
+            "id": "晋中市-寿阳县-203",
+            "name": "段王村罗汉寺",
+            "url": "https://www.720yun.com/vr/0bajtpky5a0",
+            "longitude": 112.98892415743761,
+            "latitude": 37.97003541721831
+          },
+          {
+            "id": "晋中市-寿阳县-204",
+            "name": "平舒崇福寺",
+            "url": "https://www.720yun.com/vr/023jtpknva4",
+            "longitude": 113.07098409628244,
+            "latitude": 37.965881894956944
+          },
+          {
+            "id": "晋中市-寿阳县-205",
+            "name": "东郭义清微观",
+            "url": "https://www.720yun.com/vr/9e5jtpkOsf3",
+            "longitude": 113.04676254583362,
+            "latitude": 37.981795605530884
+          },
+          {
+            "id": "晋中市-寿阳县-206",
+            "name": "西郭义大王庙",
+            "url": "https://www.720yun.com/vr/0a4jtpknvv0",
+            "longitude": 113.03982475271894,
+            "latitude": 37.98123693309127
+          },
+          {
+            "id": "晋中市-寿阳县-207",
+            "name": "野狐岭白龙庙",
+            "url": "https://www.720yun.com/vr/b9ajtpky5k4",
+            "longitude": 113.01330129440078,
+            "latitude": 37.98679388692539
+          },
+          {
+            "id": "晋中市-寿阳县-208",
+            "name": "广度寺",
+            "url": "https://www.720yun.com/vr/3dajtpknvf1",
+            "longitude": 113.18341017492547,
+            "latitude": 37.9013076069566
+          },
+          {
+            "id": "晋中市-寿阳县-209",
+            "name": "界石佛殿",
+            "url": "https://www.720yun.com/vr/064jtpky5n6",
+            "longitude": 113.30503624944893,
+            "latitude": 37.961207503355695
+          },
+          {
+            "id": "晋中市-寿阳县-210",
+            "name": "野狐岭关帝庙",
+            "url": "https://www.720yun.com/vr/b9ajtpky5k4",
+            "longitude": 113.01330129440078,
+            "latitude": 37.98679388692539
+          }
+        ]
+      },
+      {
+        "district": "太谷区",
+        "projects": [
+          {
+            "id": "晋中市-太谷区-211",
+            "name": "太谷文庙",
+            "url": "https://www.720yun.com/vr/9fcjt0uk5y7",
+            "longitude": 112.55738411926058,
+            "latitude": 37.42739557731329
+          },
+          {
+            "id": "晋中市-太谷区-212",
+            "name": "范村东阁",
+            "url": "https://www.720yun.com/vr/b41jt0mfeO1",
+            "longitude": 112.8017796315606,
+            "latitude": 37.48407262387933
+          },
+          {
+            "id": "晋中市-太谷区-213",
+            "name": "北田受奶奶庙",
+            "url": "https://www.720yun.com/vr/e5bjt0mvOa3",
+            "longitude": 112.82174474101151,
+            "latitude": 37.475124744363114
+          },
+          {
+            "id": "晋中市-太谷区-214",
+            "name": "中咸阳圣果寺",
+            "url": "https://www.720yun.com/vr/398jt0mvOy0",
+            "longitude": 112.5603798783058,
+            "latitude": 37.38508596398815
+          },
+          {
+            "id": "晋中市-太谷区-215",
+            "name": "李顺庭宅院",
+            "url": "https://www.720yun.com/vr/db1jt0mfva6",
+            "longitude": 112.55738411926058,
+            "latitude": 37.42739557731329
+          },
+          {
+            "id": "晋中市-太谷区-216",
+            "name": "新村妙觉寺",
+            "url": "https://www.720yun.com/vr/44fjtpmnsf9",
+            "longitude": 112.63312016697625,
+            "latitude": 37.41861998628946
+          },
+          {
+            "id": "晋中市-太谷区-217",
+            "name": "范村圆智寺",
+            "url": "https://www.720yun.com/vr/837jt0mvOO8",
+            "longitude": 112.80045301398346,
+            "latitude": 37.48796500038438
+          },
+          {
+            "id": "晋中市-太谷区-218",
+            "name": "安禅寺",
+            "url": "https://www.720yun.com/vr/b52jtpumrO0",
+            "longitude": 112.75959475565928,
+            "latitude": 37.69283940975972
+          },
+          {
+            "id": "晋中市-太谷区-219",
+            "name": "无边寺",
+            "url": "https://www.720yun.com/vr/b2fjt0uyuu1",
+            "longitude": 112.56437491240033,
+            "latitude": 37.42877526896986
+          },
+          {
+            "id": "晋中市-太谷区-220",
+            "name": "真圣寺",
+            "url": "https://www.720yun.com/vr/254jtpunOk6",
+            "longitude": 112.83658295142534,
+            "latitude": 37.419780017523216
+          },
+          {
+            "id": "晋中市-太谷区-221",
+            "name": "光化寺",
+            "url": "https://www.720yun.com/vr/bd5jtpukev7",
+            "longitude": 112.50730637182639,
+            "latitude": 37.36771776951089
+          },
+          {
+            "id": "晋中市-太谷区-222",
+            "name": "曹家大院",
+            "url": "https://www.720yun.com/vr/d30jt0mnua8",
+            "longitude": 112.52020900335785,
+            "latitude": 37.39726895195547
+          },
+          {
+            "id": "晋中市-太谷区-223",
+            "name": "太谷鼓楼",
+            "url": "https://www.720yun.com/vr/81bjt0unvO2",
+            "longitude": 112.56531346199715,
+            "latitude": 37.433303397540854
+          },
+          {
+            "id": "晋中市-太谷区-224",
+            "name": "孟高永庆寺",
+            "url": "https://www.720yun.com/vr/912jtpmftf4",
+            "longitude": 112.68019793332934,
+            "latitude": 37.50579753385077
+          },
+          {
+            "id": "晋中市-太谷区-225",
+            "name": "宣梵寺",
+            "url": "https://www.720yun.com/vr/90ajtpmuuw4",
+            "longitude": 112.75959475565928,
+            "latitude": 37.69283940975972
+          }
+        ]
+      },
+      {
+        "district": "昔阳县",
+        "projects": [
+          {
+            "id": "晋中市-昔阳县-226",
+            "name": "昔阳崇教寺",
+            "url": "https://www.720yun.com/vr/3c5jtpev5m8",
+            "longitude": 113.71209377942648,
+            "latitude": 37.62294987928614
+          },
+          {
+            "id": "晋中市-昔阳县-227",
+            "name": "昔阳离相寺",
+            "url": "https://www.720yun.com/vr/3f5jtpew5u3",
+            "longitude": 113.80510864379606,
+            "latitude": 37.54161366846994
+          },
+          {
+            "id": "晋中市-昔阳县-228",
+            "name": "福严寺",
+            "url": "https://www.720yun.com/vr/2edjtpewzn1",
+            "longitude": 113.71361290387442,
+            "latitude": 37.61788404299596
+          },
+          {
+            "id": "晋中市-昔阳县-229",
+            "name": "北界都梵乘寺",
+            "url": "https://www.720yun.com/vr/c6ajtsuuOa3",
+            "longitude": 113.84885019331561,
+            "latitude": 37.641626739925215
+          },
+          {
+            "id": "晋中市-昔阳县-230",
+            "name": "昔阳东岳庙大殿",
+            "url": "https://www.720yun.com/vr/de6jtpevty1",
+            "longitude": 113.71361290387442,
+            "latitude": 37.61788404299596
+          }
+        ]
+      },
+      {
+        "district": "榆次区",
+        "projects": [
+          {
+            "id": "晋中市-榆次区-231",
+            "name": "榆次城隍庙",
+            "url": "https://www.720yun.com/vr/3f0jtp4mty8",
+            "longitude": 112.75908927914882,
+            "latitude": 37.68531848574532
+          },
+          {
+            "id": "晋中市-榆次区-232",
+            "name": "宣乘寺正殿",
+            "url": "https://www.720yun.com/vr/c16jtpkyOu4",
+            "longitude": 112.71450350211099,
+            "latitude": 37.703940486801216
+          },
+          {
+            "id": "晋中市-榆次区-233",
+            "name": "蒲池寿圣寺",
+            "url": "https://www.720yun.com/vr/9a2jtpkvtw2",
+            "longitude": 112.88090336901553,
+            "latitude": 37.51259333848572
+          },
+          {
+            "id": "晋中市-榆次区-234",
+            "name": "永康东岳庙",
+            "url": "https://www.720yun.com/vr/616jtpewzm7",
+            "longitude": 112.62925062616148,
+            "latitude": 37.63394826374783
+          },
+          {
+            "id": "晋中市-榆次区-235",
+            "name": "高壁资圣寺",
+            "url": "https://www.720yun.com/vr/77cjtphuta2",
+            "longitude": 112.82495564422638,
+            "latitude": 37.83704005673134
+          },
+          {
+            "id": "晋中市-榆次区-236",
+            "name": "颉纥法宝寺",
+            "url": "https://www.720yun.com/vr/3bejtpkn5O5",
+            "longitude": 112.94466581275817,
+            "latitude": 37.82207002500728
+          },
+          {
+            "id": "晋中市-榆次区-237",
+            "name": "北流关帝庙",
+            "url": "https://www.720yun.com/vr/171jtpkvta8",
+            "longitude": 112.69954707469205,
+            "latitude": 37.83854782035379
+          },
+          {
+            "id": "晋中市-榆次区-238",
+            "name": "南田关帝庙",
+            "url": "https://www.720yun.com/vr/c75jtpewOf8",
+            "longitude": 112.69954707469205,
+            "latitude": 37.83854782035379
+          },
+          {
+            "id": "晋中市-榆次区-239",
+            "name": "庄子圣母祠",
+            "url": "https://www.720yun.com/vr/7e2jtpkysm8",
+            "longitude": 112.824987534072,
+            "latitude": 37.625011370769265
+          },
+          {
+            "id": "晋中市-榆次区-240",
+            "name": "金界寺",
+            "url": "https://www.720yun.com/vr/d51jtpkvuw1",
+            "longitude": 112.71450350211099,
+            "latitude": 37.703940486801216
+          },
+          {
+            "id": "晋中市-榆次区-241",
+            "name": "宝峰宫",
+            "url": "https://www.720yun.com/vr/379jtpkyzm3",
+            "longitude": 112.71450350211099,
+            "latitude": 37.703940486801216
+          }
+        ]
+      },
+      {
+        "district": "榆社县",
+        "projects": [
+          {
+            "id": "晋中市-榆社县-242",
+            "name": "崇圣寺",
+            "url": "https://www.720yun.com/vr/f33jt0svra7",
+            "longitude": 112.74052822121,
+            "latitude": 37.120188923076675
+          },
+          {
+            "id": "晋中市-榆社县-243",
+            "name": "石塔",
+            "url": "https://www.720yun.com/vr/559jtsuury1",
+            "longitude": 112.98159856583429,
+            "latitude": 37.07636966870016
+          },
+          {
+            "id": "晋中市-榆社县-244",
+            "name": "郝北寿圣寺",
+            "url": "https://www.720yun.com/vr/fa0jt0syek1",
+            "longitude": 112.9633901826387,
+            "latitude": 36.93903450406569
+          },
+          {
+            "id": "晋中市-榆社县-245",
+            "name": "连家庄文峰塔",
+            "url": "https://www.720yun.com/vr/792jt0sytn2",
+            "longitude": 112.98993969181664,
+            "latitude": 37.06858729498847
+          },
+          {
+            "id": "晋中市-榆社县-246",
+            "name": "下赤峪资福寺",
+            "url": "https://www.720yun.com/vr/e2cjtpeyka9",
+            "longitude": 112.75710393414123,
+            "latitude": 37.07870943496407
+          }
+        ]
+      },
+      {
+        "district": "左权县",
+        "projects": [
+          {
+            "id": "晋中市-左权县-247",
+            "name": "苇则寿圣寺",
+            "url": "https://www.720yun.com/vr/638jtpkv5v2",
+            "longitude": 113.66929572018407,
+            "latitude": 37.1119492640538
+          },
+          {
+            "id": "晋中市-左权县-248",
+            "name": "寺坪普照寺大殿",
+            "url": "https://www.720yun.com/vr/899jtpenra6",
+            "longitude": 113.61346387680571,
+            "latitude": 37.04461280811593
+          },
+          {
+            "id": "晋中市-左权县-249",
+            "name": "左权文庙大成殿",
+            "url": "https://www.720yun.com/vr/414jtpknuk6",
+            "longitude": 113.37815903660555,
+            "latitude": 37.082151939015944
+          },
+          {
+            "id": "晋中市-左权县-250",
+            "name": "粟城寿圣寺",
+            "url": "https://www.720yun.com/vr/5bcjtpknuk8",
+            "longitude": 113.66929572018407,
+            "latitude": 37.1119492640538
+          },
+          {
+            "id": "晋中市-左权县-251",
+            "name": "新店石佛寺正殿",
+            "url": "https://www.720yun.com/vr/cf0jtpenrk3",
+            "longitude": 113.33230422337377,
+            "latitude": 37.0883814858446
+          }
+        ]
+      }
+    ]
+  }
+]
