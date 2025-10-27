@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const BAIDU_MAP_AK = '1ufK1yIu2Lu9KhwzciQAGjGNqOu7iKcE';
     const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784' };
     const DEFAULT_COLOR = '#E0E0E0';
@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const treeContainer = document.getElementById('tree-container');
     const sidebar = document.getElementById('tree-menu');
     const toggleButton = document.querySelector('.toggle-sidebar');
-    let map, allMapMarkers = new Map(), allData = [], virtualScroller, flatTreeData = [];
+    let map, allMapMarkers = new Map(), allData = [], flatTreeData = [];
+    let mode = 'geo'; // 默认地理模式
+    const LEVELS = ['国保', '省保', '市保', '县保', '未定级'];
 
     // --- 侧边栏切换 ---
     toggleButton.addEventListener('click', () => {
@@ -30,9 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
             map.enableScrollWheelZoom(true);
             map.setMapType(BMAP_EARTH_MAP);
 
-            allData = validateAndCleanData(await (await fetch('data.json')).json());
-            flatTreeData = flattenTreeData(allData);
-            setupVirtualScroll();
+            allData = validateAndCleanData(await (await fetch('data.json')).json().catch(() => {
+                console.error('【调试】data.json 加载失败');
+                return [];
+            }));
+            if (!allData.length) {
+                throw new Error('data.json 为空或无效');
+            }
+            flatTreeData = buildFlatTreeData(mode);
+            buildTreeMenu();
             addMapMarkers();
             setupInteractions();
 
@@ -61,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!project.id || !project.name || !project.url || isNaN(project.longitude) || isNaN(project.latitude)) {
                         warnings.push(`项目数据无效或坐标缺失，已跳过: ${project.id || project.name || '未知项目'}`);
                         district.projects.splice(i, 1);
+                    } else if (!project.protectionLevel) {
+                        console.warn(`项目无保护级别: ${project.id}, 默认 '未定级'`);
+                        project.protectionLevel = '未定级';
                     }
                 }
             });
@@ -81,91 +92,132 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function flattenTreeData(data) {
+    function buildFlatTreeData(mode) {
         const flatData = [];
-        const totalProjectCount = data.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0);
-        flatData.push({ type: 'province', id: 'shanxi', name: '山西省', projectCount: totalProjectCount, expanded: true, level: 0, visible: true });
+        let totalProjectCount = 0;
 
-        data.forEach(city => {
-            const cityProjectCount = city.districts.reduce((sum, d) => sum + d.projects.length, 0);
-            flatData.push({ type: 'city', id: city.city, name: city.city, projectCount: cityProjectCount, expanded: false, level: 1, parentId: 'shanxi', visible: true });
-            city.districts.forEach(district => {
-                flatData.push({ type: 'district', id: `${city.city}-${district.district}`, name: district.district, projectCount: district.projects.length, expanded: false, level: 2, parentId: city.city, visible: false });
-                district.projects.forEach(project => {
-                    flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 3, parentId: `${city.city}-${district.district}`, visible: false });
+        if (mode === 'geo') {
+            totalProjectCount = allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0);
+            flatData.push({ type: 'province', id: 'shanxi', name: '山西省', projectCount: totalProjectCount, expanded: true, level: 0, visible: true });
+
+            allData.forEach(city => {
+                const cityProjectCount = city.districts.reduce((sum, d) => sum + d.projects.length, 0);
+                flatData.push({ type: 'city', id: city.city, name: city.city, projectCount: cityProjectCount, expanded: false, level: 1, parentId: 'shanxi', visible: true });
+                city.districts.forEach(district => {
+                    flatData.push({ type: 'district', id: `${city.city}-${district.district}`, name: district.district, projectCount: district.projects.length, expanded: false, level: 2, parentId: city.city, visible: false });
+                    district.projects.forEach(project => {
+                        flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 3, parentId: `${city.city}-${district.district}`, visible: false });
+                    });
                 });
             });
-        });
-        return flatData;
-    }
+        } else { // 'level' 模式
+            const levelGroups = new Map(LEVELS.map(l => [l, []]));
+            allData.forEach(city => {
+                city.districts.forEach(district => {
+                    district.projects.forEach(project => {
+                        const level = project.protectionLevel || '未定级';
+                        if (levelGroups.has(level)) {
+                            levelGroups.get(level).push(project);
+                        }
+                        totalProjectCount++;
+                    });
+                });
+            });
 
-    function setupVirtualScroll() {
-        treeContainer.innerHTML = '';
-        if (!window.VirtualScroller) {
-            console.warn('【调试】VirtualScroller 未加载，降级到非虚拟模式');
-            buildTreeMenu();
-            return;
+            flatData.push({ type: 'province', id: 'shanxi', name: '山西省', projectCount: totalProjectCount, expanded: true, level: 0, visible: true });
+
+            LEVELS.forEach(levelName => {
+                const projects = levelGroups.get(levelName) || [];
+                console.log(`【调试】级别 ${levelName}: ${projects.length} 个项目`);
+                const count = projects.length;
+                const categoryId = `level-${levelName.toLowerCase().slice(0, 3)}`;
+                flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: count, expanded: false, level: 1, parentId: 'shanxi', visible: true }); // 默认折叠
+                projects.forEach(project => {
+                    flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 2, parentId: categoryId, visible: false }); // 项目默认隐藏
+                });
+            });
         }
-        virtualScroller = new VirtualScroller(treeContainer, {
-            items: flatTreeData.filter(item => item.visible),
-            itemHeight: 32,
-            renderItem: (item) => {
-                const div = document.createElement('div');
-                div.className = `${item.type}-item`;
-                div.dataset.itemId = item.id;
-                div.style.paddingLeft = `${item.level * 15}px`;
-                if (item.type !== 'project') {
-                    div.classList.toggle('expanded', item.expanded);
-                    const title = document.createElement('div');
-                    title.className = `${item.type}-title clickable-title`;
-                    title.innerHTML = `<span>${item.name}</span><span class="project-count">${item.projectCount || ''}</span>`;
-                    div.appendChild(title);
-                } else {
-                    div.innerHTML = `<a href="${item.url}" data-project-id="${item.id}">${item.name}</a>`;
-                }
-                return div;
-            },
-            overscan: 5
-        });
+
+        return flatData;
     }
 
     function buildTreeMenu() {
         const rootUl = document.createElement('ul');
         rootUl.className = 'tree-root';
-        const citiesData = allData.map(city => ({
-            type: 'city',
-            id: city.city,
-            name: city.city,
-            projectCount: city.districts.reduce((sum, d) => sum + d.projects.length, 0),
-            children: city.districts.map(district => ({
-                type: 'district',
-                id: `${city.city}-${district.district}`,
-                name: district.district,
-                projectCount: district.projects.length,
-                children: district.projects.map(project => ({
+        if (mode === 'geo') {
+            const citiesData = allData.map(city => ({
+                type: 'city',
+                id: city.city,
+                name: city.city,
+                projectCount: city.districts.reduce((sum, d) => sum + d.projects.length, 0),
+                children: city.districts.map(district => ({
+                    type: 'district',
+                    id: `${city.city}-${district.district}`,
+                    name: district.district,
+                    projectCount: district.projects.length,
+                    children: district.projects.map(project => ({
+                        type: 'project',
+                        id: project.id,
+                        name: project.name,
+                        url: project.url
+                    }))
+                }))
+            }));
+            rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), citiesData, true));
+        } else {
+            const levelGroups = new Map(LEVELS.map(l => [l, []]));
+            allData.forEach(city => {
+                city.districts.forEach(district => {
+                    district.projects.forEach(project => {
+                        const level = project.protectionLevel || '未定级';
+                        if (levelGroups.has(level)) levelGroups.get(level).push(project);
+                    });
+                });
+            });
+            const levelData = LEVELS.map(level => ({
+                type: 'level-category',
+                id: `level-${level.toLowerCase().slice(0, 3)}`,
+                name: level,
+                projectCount: levelGroups.get(level).length,
+                children: levelGroups.get(level).map(project => ({
                     type: 'project',
                     id: project.id,
                     name: project.name,
                     url: project.url
-                }))
-            }))
-        }));
-        rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), citiesData, true));
+                })),
+                expanded: false // 默认折叠
+            }));
+            rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), levelData, true));
+        }
         treeContainer.innerHTML = '';
         treeContainer.appendChild(rootUl);
+
+        // 默认折叠级别模式下的子项目
+        if (mode === 'level') {
+            treeContainer.querySelectorAll('.level-category-item').forEach(li => {
+                li.classList.remove('expanded'); // 确保折叠
+                const subList = li.querySelector('ul');
+                if (subList) {
+                    subList.querySelectorAll('li').forEach(subLi => {
+                        subLi.style.display = 'none'; // 隐藏项目
+                    });
+                }
+            });
+        }
     }
 
     function buildNode(type, id, name, projectCount, children = [], expanded = false, url = '') {
         const li = document.createElement('li');
         li.className = `${type}-item${expanded ? ' expanded' : ''}`;
+        li.dataset.itemId = id;
         li.innerHTML = type === 'project'
             ? `<a href="${url}" data-project-id="${id}">${name}</a>`
-            : `<div class="${type}-title clickable-title"><span>${name}</span><span class="project-count">${projectCount || ''}</span></div>`;
+            : `<div class="${type === 'level-category' ? 'level-category-title' : `${type}-title`} clickable-title"><span>${name}</span><span class="project-count">${projectCount || ''}</span></div>`;
         if (children.length) {
             const ul = document.createElement('ul');
-            ul.className = `${type === 'province' ? 'cities' : type === 'city' ? 'districts' : 'projects'}-list`;
+            ul.className = `${type === 'province' ? 'cities' : type === 'city' ? 'districts' : type === 'level-category' ? 'projects' : 'projects'}-list`;
             children.forEach(child => {
-                ul.appendChild(buildNode(child.type, child.id, child.name, child.projectCount, child.children, false, child.url || ''));
+                ul.appendChild(buildNode(child.type, child.id, child.name, child.projectCount, child.children, child.expanded || false, child.url || ''));
             });
             li.appendChild(ul);
         }
@@ -199,7 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('【调试】地图标记点添加:', markerCount);
     }
 
-    // 【新需求】获取节点下所有项目 ID
     function getChildProjectIds(parentId) {
         const projectIds = [];
         function collectProjects(id) {
@@ -222,6 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupInteractions() {
         const searchBox = document.getElementById('search-box');
+        const modeToggle = document.getElementById('mode-toggle');
         const selectors = {
             allLis: () => treeContainer.querySelectorAll('li'),
             projects: () => treeContainer.querySelectorAll('.project-item'),
@@ -229,24 +281,38 @@ document.addEventListener('DOMContentLoaded', function() {
             province: () => treeContainer.querySelector('.province-item')
         };
 
-        treeContainer.addEventListener('click', function(event) {
+        if (modeToggle) {
+            modeToggle.addEventListener('click', () => {
+                console.log('【调试】点击模式切换按钮, 当前 mode:', mode);
+                mode = mode === 'geo' ? 'level' : 'geo';
+                console.log('【调试】切换后 mode:', mode);
+                modeToggle.textContent = mode === 'geo' ? '切换到级别模式' : '切换到地理模式';
+                flatTreeData = buildFlatTreeData(mode);
+                console.log('【调试】flatTreeData:', flatTreeData);
+                buildTreeMenu();
+                const allProjectIds = flatTreeData.filter(item => item.type === 'project').map(item => item.id);
+                console.log('【调试】切换模式后显示项目:', allProjectIds.length);
+                updateMapMarkersVisibility(allProjectIds);
+                searchBox.value = '';
+                filterTree('');
+            });
+        } else {
+            console.warn('【调试】未找到模式切换按钮');
+        }
+
+        treeContainer.addEventListener('click', function (event) {
             const target = event.target;
             if (target.tagName === 'A' && target.dataset.projectId) {
                 event.preventDefault();
                 const projectId = target.dataset.projectId;
                 const marker = allMapMarkers.get(projectId);
-                // 【修复】确保首次点击触发 flyTo，立即关闭当前 infoWindow
-                if (marker && map) {
-                    // 【新需求】点击项目时只显示该项目的标记点
-                    // updateMapMarkersVisibility([projectId]);
-                    // 【修复】关闭当前 infoWindow
+                if (map && marker) {
                     if (map.getInfoWindow()) {
                         map.closeInfoWindow();
                         console.log('【调试】关闭当前 infoWindow');
                     }
                     const infoWindowContent = `<div><b>${target.textContent}</b><p><a href="${target.href}" rel="noopener noreferrer">点击进入720全景</a></p></div>`;
                     console.log('【调试】点击项目:', target.textContent, 'ID:', projectId, 'Marker:', !!marker, 'Map:', !!map);
-                    // 延迟执行 flyTo，确保地图渲染完成
                     const executeFlyTo = () => {
                         try {
                             map.flyTo(marker.getPosition(), 17, { duration: 800, pitch: 45 });
@@ -268,82 +334,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const clickableTitle = target.closest('.clickable-title');
             if (clickableTitle) {
-                const parent = clickableTitle.closest(virtualScroller ? '[data-item-id]' : 'li');
+                const parent = clickableTitle.closest('li');
                 if (!parent) return;
 
-                if (virtualScroller) {
-                    const item = flatTreeData.find(i => i.id === parent.dataset.itemId);
-                    if (!item || item.type === 'project') return;
-
-                    const isNowExpanded = !item.expanded;
-                    item.expanded = isNowExpanded;
-                    if (!isNowExpanded) resetChildrenExpanded(item.id);
-
-                    if (isNowExpanded && (item.type === 'city' || item.type === 'district')) {
-                        flatTreeData.forEach(other => {
-                            if (other.parentId === item.parentId && other.id !== item.id && other.expanded) {
-                                other.expanded = false;
-                                updateChildrenVisibility(other.id, false, true);
-                                resetChildrenExpanded(other.id);
-                            }
-                        });
-                    }
-
-                    updateChildrenVisibility(item.id, isNowExpanded, true);
-                    virtualScroller.items = flatTreeData.filter(i => i.visible);
-                    virtualScroller.update();
-                    // 【新需求】更新地图标记点，仅显示当前节点下的项目
+                const isExpanded = parent.classList.contains('expanded');
+                if (!isExpanded) {
+                    const parentUl = parent.parentElement;
+                    parentUl.querySelectorAll(`.${parent.className.split(' ')[0]}.expanded`).forEach(el => {
+                        el.classList.remove('expanded');
+                        el.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
+                        el.querySelectorAll('.expanded').forEach(subEl => subEl.classList.remove('expanded'));
+                    });
+                }
+                parent.classList.toggle('expanded');
+                const subList = parent.querySelector('ul');
+                if (subList) {
+                    subList.querySelectorAll('li').forEach(subLi => {
+                        subLi.style.display = isExpanded ? 'none' : 'block';
+                        subLi.querySelectorAll('.expanded').forEach(subSubEl => subSubEl.classList.remove('expanded'));
+                        subLi.querySelectorAll('ul li').forEach(subSubLi => subSubLi.style.display = 'none');
+                    });
+                }
+                const itemId = parent.dataset.itemId || parent.querySelector('.clickable-title span').textContent;
+                const item = flatTreeData.find(i => i.id === itemId || i.name === itemId);
+                if (item) {
                     const projectIds = getChildProjectIds(item.id);
                     updateMapMarkersVisibility(projectIds);
-                    console.log('【调试】虚拟模式点击:', item.name, '类型:', item.type, '展开:', isNowExpanded, '显示项目数:', projectIds.length);
-                } else {
-                    const isExpanded = parent.classList.contains('expanded');
-                    if (!isExpanded) {
-                        const parentUl = parent.parentElement;
-                        parentUl.querySelectorAll(`.${parent.className.split(' ')[0]}.expanded`).forEach(el => {
-                            el.classList.remove('expanded');
-                            el.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
-                            el.querySelectorAll('.expanded').forEach(subEl => subEl.classList.remove('expanded'));
-                        });
-                    }
-                    parent.classList.toggle('expanded');
-                    const subList = parent.querySelector('ul');
-                    if (subList) {
-                        subList.querySelectorAll('li').forEach(subLi => {
-                            subLi.style.display = isExpanded ? 'none' : 'block';
-                            subLi.querySelectorAll('.expanded').forEach(subSubEl => subSubEl.classList.remove('expanded'));
-                            subLi.querySelectorAll('ul li').forEach(subSubLi => subSubLi.style.display = 'none');
-                        });
-                    }
-                    // 【新需求】更新地图标记点，仅显示当前节点下的项目
-                    const itemId = parent.dataset.itemId || parent.querySelector('.clickable-title span').textContent;
-                    const item = flatTreeData.find(i => i.id === itemId || i.name === itemId);
-                    if (item) {
-                        const projectIds = getChildProjectIds(item.id);
-                        updateMapMarkersVisibility(projectIds);
-                        console.log('【调试】非虚拟模式点击:', item.name, '类型:', item.type, '展开:', !isExpanded, '显示项目数:', projectIds.length);
-                    }
+                    console.log('【调试】点击:', item.name, '类型:', item.type, '展开:', !isExpanded, '显示项目数:', projectIds.length);
                 }
             }
         });
-
-        function updateChildrenVisibility(parentId, visible, isRecursive) {
-            flatTreeData.forEach(item => {
-                if (item.parentId === parentId) {
-                    item.visible = visible;
-                    if (isRecursive) updateChildrenVisibility(item.id, visible && item.expanded, true);
-                }
-            });
-        }
-
-        function resetChildrenExpanded(parentId) {
-            flatTreeData.forEach(item => {
-                if (item.parentId === parentId) {
-                    item.expanded = false;
-                    resetChildrenExpanded(item.id);
-                }
-            });
-        }
 
         function filterTree(searchTerm) {
             const visibleIds = [];
@@ -356,23 +376,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const province = selectors.province();
 
             if (searchTerm === '') {
-                if (virtualScroller) {
-                    flatTreeData.forEach(item => {
-                        item.expanded = item.type === 'province';
-                        item.visible = item.type === 'province' || item.type === 'city';
-                        if (item.type === 'district' || item.type === 'project') item.visible = false;
-                    });
-                    virtualScroller.items = flatTreeData.filter(item => item.visible);
-                    virtualScroller.update();
-                } else {
-                    allLis.forEach(li => li.style.display = 'none');
-                    provinceCity.forEach(li => {
+                allLis.forEach(li => li.style.display = 'none');
+                provinceCity.forEach(li => {
+                    li.style.display = 'block';
+                    li.classList.remove('expanded');
+                    const subList = li.querySelector('ul');
+                    if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
+                });
+                if (province) province.classList.add('expanded');
+                if (mode === 'level') {
+                    treeContainer.querySelectorAll('.level-category-item').forEach(li => {
                         li.style.display = 'block';
-                        li.classList.remove('expanded');
+                        li.classList.remove('expanded'); // 默认折叠
                         const subList = li.querySelector('ul');
                         if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
                     });
-                    if (province) province.classList.add('expanded');
                 }
                 visibleIds.push(...flatTreeData.filter(item => item.type === 'project').map(item => item.id));
             } else {
@@ -382,60 +400,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 })));
                 visibleIds.push(...foundProjectIds);
 
-                if (virtualScroller) {
-                    flatTreeData.forEach(item => {
-                        item.visible = false;
-                        item.expanded = item.type === 'province';
-                    });
-                    const visibleParents = new Set();
-                    flatTreeData.forEach(item => {
-                        if (item.type === 'project' && foundProjectIds.has(item.id)) {
-                            item.visible = true;
-                            let parentId = item.parentId;
-                            while (parentId) {
-                                visibleParents.add(parentId);
-                                const parent = flatTreeData.find(p => p.id === parentId);
-                                parentId = parent?.parentId;
-                            }
-                        }
-                    });
-                    flatTreeData.forEach(item => {
-                        if (item.type !== 'project' && visibleParents.has(item.id)) {
-                            item.visible = true;
-                            item.expanded = true;
-                        }
-                    });
-                    const provinceItem = flatTreeData.find(i => i.type === 'province');
-                    if (provinceItem && visibleParents.size) {
-                        provinceItem.visible = true;
-                        provinceItem.expanded = true;
-                    }
-                    virtualScroller.items = flatTreeData.filter(item => item.visible);
-                    virtualScroller.update();
-                } else {
-                    allLis.forEach(li => li.style.display = 'none');
-                    let hasResults = false;
-                    projects.forEach(projectLi => {
-                        const a = projectLi.querySelector('a');
-                        if (a?.textContent.toLowerCase().includes(searchTerm)) {
-                            hasResults = true;
+                allLis.forEach(li => li.style.display = 'none');
+                let hasResults = false;
+                projects.forEach(projectLi => {
+                    const a = projectLi.querySelector('a');
+                    if (a?.textContent.toLowerCase().includes(searchTerm)) {
+                        hasResults = true;
+                        projectLi.style.display = 'block';
+                        let parent = projectLi.closest('.district-item, .level-category-item');
+                        if (parent) {
+                            parent.style.display = 'block';
+                            parent.classList.add('expanded'); // 搜索时展开匹配类别
+                            const subList = parent.querySelector('ul');
+                            if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
                             projectLi.style.display = 'block';
-                            let parent = projectLi.closest('.district-item');
+                            parent = parent.closest('.city-item, .province-item');
                             if (parent) {
                                 parent.style.display = 'block';
                                 parent.classList.add('expanded');
-                                parent = parent.closest('.city-item');
-                                if (parent) {
-                                    parent.style.display = 'block';
-                                    parent.classList.add('expanded');
-                                    parent = parent.closest('.province-item');
-                                    if (parent) parent.style.display = 'block';
-                                }
+                                parent = parent.closest('.province-item');
+                                if (parent) parent.style.display = 'block';
                             }
                         }
-                    });
-                    if (!hasResults) console.log('【调试】搜索无结果:', searchTerm);
-                }
+                    }
+                });
+                if (!hasResults) console.log('【调试】搜索无结果:', searchTerm);
+
                 if (foundProjectIds.size === 0 && searchTerm) {
                     const p = document.createElement('p');
                     p.className = 'no-results';
@@ -447,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateMapMarkersVisibility(visibleIds);
         }
 
-        searchBox.addEventListener('input', function() {
+        searchBox.addEventListener('input', function () {
             setTimeout(() => filterTree(this.value.trim().toLowerCase()), 300);
         });
     }
