@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             map.setMapType(BMAP_EARTH_MAP);
 
             allData = validateAndCleanData(await (await fetch('data.json')).json().catch(() => {
-                console.error('【调试】data.json 加载失败');
+                console.error('data.json 加载失败');
                 return [];
             }));
             if (!allData.length) {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             updateMapMarkersVisibility(flatTreeData.filter(item => item.type === 'project').map(item => item.id));
             document.querySelectorAll('.loading').forEach(el => el.remove());
-            console.log('【调试】初始化完成');
+            console.info('初始化完成');
         } catch (error) {
             console.error('初始化失败:', error);
             treeContainer.innerHTML = `<p style="color: red;">加载失败：${error.message}</p>`;
@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             LEVELS.forEach(levelName => {
                 const projects = levelGroups.get(levelName) || [];
-                console.log(`【调试】级别 ${levelName}: ${projects.length} 个项目`);
                 const count = projects.length;
                 const categoryId = `level-${levelName.toLowerCase().slice(0, 3)}`;
                 flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: count, expanded: false, level: 1, parentId: 'shanxi', visible: true }); // 默认折叠
@@ -248,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         });
-        console.log('【调试】地图标记点添加:', markerCount);
+        console.info('地图标记点添加:', markerCount);
     }
 
     function getChildProjectIds(parentId) {
@@ -283,21 +282,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (modeToggle) {
             modeToggle.addEventListener('click', () => {
-                console.log('【调试】点击模式切换按钮, 当前 mode:', mode);
                 mode = mode === 'geo' ? 'level' : 'geo';
-                console.log('【调试】切换后 mode:', mode);
                 modeToggle.textContent = mode === 'geo' ? '切换到级别模式' : '切换到地理模式';
                 flatTreeData = buildFlatTreeData(mode);
-                console.log('【调试】flatTreeData:', flatTreeData);
                 buildTreeMenu();
                 const allProjectIds = flatTreeData.filter(item => item.type === 'project').map(item => item.id);
-                console.log('【调试】切换模式后显示项目:', allProjectIds.length);
                 updateMapMarkersVisibility(allProjectIds);
                 searchBox.value = '';
                 filterTree('');
             });
         } else {
-            console.warn('【调试】未找到模式切换按钮');
+            console.warn('未找到模式切换按钮');
         }
 
         treeContainer.addEventListener('click', function (event) {
@@ -309,25 +304,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (map && marker) {
                     if (map.getInfoWindow()) {
                         map.closeInfoWindow();
-                        console.log('【调试】关闭当前 infoWindow');
                     }
                     const infoWindowContent = `<div><b>${target.textContent}</b><p><a href="${target.href}" rel="noopener noreferrer">点击进入720全景</a></p></div>`;
-                    console.log('【调试】点击项目:', target.textContent, 'ID:', projectId, 'Marker:', !!marker, 'Map:', !!map);
                     const executeFlyTo = () => {
                         try {
                             map.flyTo(marker.getPosition(), 17, { duration: 800, pitch: 45 });
                             map.addEventListener('moveend', () => {
                                 map.openInfoWindow(new BMapGL.InfoWindow(infoWindowContent), marker.getPosition());
-                                console.log('【调试】打开新 infoWindow:', target.textContent);
                                 map.removeEventListener('moveend', arguments.callee);
                             });
                         } catch (err) {
-                            console.error('【调试】flyTo 执行失败:', err);
+                            console.error('flyTo 执行失败:', err);
                         }
                     };
                     setTimeout(executeFlyTo, 100);
                 } else {
-                    console.error('【调试】点击失败: 地图或标记未准备好', { projectId, markerExists: !!marker, mapExists: !!map });
+                    console.error('点击失败: 地图或标记未准备好', { projectId, markerExists: !!marker, mapExists: !!map });
                 }
                 return;
             }
@@ -360,7 +352,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (item) {
                     const projectIds = getChildProjectIds(item.id);
                     updateMapMarkersVisibility(projectIds);
-                    console.log('【调试】点击:', item.name, '类型:', item.type, '展开:', !isExpanded, '显示项目数:', projectIds.length);
                 }
             }
         });
@@ -424,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-                if (!hasResults) console.log('【调试】搜索无结果:', searchTerm);
+                if (!hasResults) console.info('搜索无结果:', searchTerm);
 
                 if (foundProjectIds.size === 0 && searchTerm) {
                     const p = document.createElement('p');
@@ -445,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateMapMarkersVisibility(visibleIds) {
         const visibleIdSet = new Set(visibleIds);
         allMapMarkers.forEach((marker, id) => marker[visibleIdSet.has(id) || (!document.getElementById('search-box').value.trim() && !visibleIds.length) ? 'show' : 'hide']());
-        console.log('【调试】更新标记点显隐:', visibleIdSet.size);
+        console.info('更新标记点显隐:', visibleIdSet.size);
     }
 
     initialize();
