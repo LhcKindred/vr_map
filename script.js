@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const BAIDU_MAP_AK = '1ufK1yIu2Lu9KhwzciQAGjGNqOu7iKcE';
-    const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784' };
+    const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784', '长治市': '#025afdff', '晋城市': '#fd9902ff' };
     const DEFAULT_COLOR = '#E0E0E0';
 
     // --- 全局变量 ---
