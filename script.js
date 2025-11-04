@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let mode = 'geo'; // 默认地理模式
     const LEVELS = ['国保', '省保', '市保', '县保', '未定级'];
 
+    // 缓存
+    const projectCache = new Map();
+    const iconCache = new Map();
+    let lastVisible = new Set();
+
     // --- 侧边栏切换 ---
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('active');
@@ -36,9 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('data.json 加载失败');
                 return [];
             }));
-            if (!allData.length) {
-                throw new Error('data.json 为空或无效');
-            }
+            if (!allData.length) throw new Error('data.json 为空或无效');
+
+            // 提前缓存项目
+            allData.forEach(city => {
+                city.districts.forEach(district => {
+                    district.projects.forEach(project => {
+                        projectCache.set(project.id, project);
+                    });
+                });
+            });
+
             flatTreeData = buildFlatTreeData(mode);
             buildTreeMenu();
             addMapMarkers();
@@ -140,123 +153,82 @@ document.addEventListener('DOMContentLoaded', function () {
         return flatData;
     }
 
+    // 新增：从 flatTreeData 递归构建 DOM（替换原 buildTreeMenu）
     function buildTreeMenu() {
-        const rootUl = document.createElement('ul');
-        rootUl.className = 'tree-root';
-        if (mode === 'geo') {
-            const citiesData = allData.map(city => ({
-                type: 'city',
-                id: city.city,
-                name: city.city,
-                projectCount: city.districts.reduce((sum, d) => sum + d.projects.length, 0),
-                children: city.districts.map(district => ({
-                    type: 'district',
-                    id: `${city.city}-${district.district}`,
-                    name: district.district,
-                    projectCount: district.projects.length,
-                    children: district.projects.map(project => ({
-                        type: 'project',
-                        id: project.id,
-                        name: project.name,
-                        url: project.url
-                    }))
-                }))
-            }));
-            rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), citiesData, true));
-        } else {
-            const levelGroups = new Map(LEVELS.map(l => [l, []]));
-            allData.forEach(city => {
-                city.districts.forEach(district => {
-                    district.projects.forEach(project => {
-                        const level = project.protectionLevel || '未定级';
-                        if (levelGroups.has(level)) levelGroups.get(level).push(project);
-                    });
-                });
-            });
-            const levelData = LEVELS.map(level => ({
-                type: 'level-category',
-                id: `level-${level.toLowerCase().slice(0, 3)}`,
-                name: level,
-                projectCount: levelGroups.get(level).length,
-                children: levelGroups.get(level).map(project => ({
-                    type: 'project',
-                    id: project.id,
-                    name: project.name,
-                    url: project.url
-                })),
-                expanded: false
-            }));
-            rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), levelData, true));
-        }
         treeContainer.innerHTML = '';
-        treeContainer.appendChild(rootUl);
+        const ul = document.createElement('ul');
+        ul.className = 'tree-root';
 
-        // 默认折叠级别模式下的子项目
+        const root = flatTreeData.find(i => i.type === 'province');
+        if (root) ul.appendChild(buildNodeFromFlat(root));
+
+        treeContainer.appendChild(ul);
+
+        // 默认折叠级别模式子项目
         if (mode === 'level') {
             treeContainer.querySelectorAll('.level-category-item').forEach(li => {
                 li.classList.remove('expanded');
                 const subList = li.querySelector('ul');
-                if (subList) {
-                    subList.querySelectorAll('li').forEach(subLi => {
-                        subLi.style.display = 'none';
-                    });
-                }
+                if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
             });
         }
     }
 
-    // ==================== 修改点 1：buildNode ====================
-    function buildNode(type, id, name, projectCount, children = [], expanded = false, url = '') {
+    function buildNodeFromFlat(item) {
         const li = document.createElement('li');
-        li.className = `${type}-item${expanded ? ' expanded' : ''}`;
-        li.dataset.itemId = id;
+        li.className = `${item.type}-item${item.expanded ? ' expanded' : ''}`;
+        li.dataset.itemId = item.id;
 
-        if (type === 'project') {
-            const urlArray = Array.isArray(url) ? url : [];
-            const validCount = urlArray.filter(u => u && typeof u === 'string' && u.startsWith('http')).length;
-            // 使用 <a> 标签，恢复原样式，但不跳转
-            li.innerHTML = `<a href="javascript:void(0)" class="project-link" data-project-id="${id}">${name}${validCount > 1 ? ` <span class="multi-count">[${validCount}]</span>` : ''
-                }</a>`;
+        if (item.type === 'project') {
+            const urls = Array.isArray(item.url) ? item.url.filter(u => u && u.startsWith('http')) : [];
+            li.innerHTML = `<a href="javascript:void(0)" class="project-link" data-project-id="${item.id}">${item.name}${urls.length > 1 ? ` <span class="multi-count">[${urls.length}]</span>` : ''}</a>`;
         } else {
-            li.innerHTML = `<div class="${type === 'level-category' ? 'level-category-title' : `${type}-title`} clickable-title"><span>${name}</span><span class="project-count">${projectCount || ''}</span></div>`;
+            const titleClass = item.type === 'level-category' ? 'level-category-title' : `${item.type}-title`;
+            li.innerHTML = `<div class="${titleClass} clickable-title"><span>${item.name}</span><span class="project-count">${item.projectCount || ''}</span></div>`;
         }
 
+        const children = flatTreeData.filter(child => child.parentId === item.id);
         if (children.length) {
-            const ul = document.createElement('ul');
-            ul.className = `${type === 'province' ? 'cities' : type === 'city' ? 'districts' : type === 'level-category' ? 'projects' : 'projects'}-list`;
-            children.forEach(child => {
-                ul.appendChild(buildNode(child.type, child.id, child.name, child.projectCount, child.children, child.expanded || false, child.url || ''));
-            });
-            li.appendChild(ul);
+            const childUl = document.createElement('ul');
+            childUl.className = `${item.type === 'province' ? 'cities' : item.type === 'city' ? 'districts' : 'projects'}-list`;
+            children.forEach(child => childUl.appendChild(buildNodeFromFlat(child)));
+            li.appendChild(childUl);
         }
         return li;
+    }
+
+    // 图标缓存
+    function getCityIcon(city) {
+        if (iconCache.has(city)) return iconCache.get(city);
+        const color = (CITY_COLORS[city] || DEFAULT_COLOR).replace('#', '%23');
+        const icon = new BMapGL.Icon(
+            `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="${color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/><circle fill="rgba(25, 35, 50, 0.8)" cx="12" cy="9.5" r="1.5"/></svg>`,
+            new BMapGL.Size(28, 28), { anchor: new BMapGL.Size(14, 28) }
+        );
+        iconCache.set(city, icon);
+        return icon;
     }
 
     function addMapMarkers() {
         let markerCount = 0;
         allData.forEach(cityData => {
-            const color = (CITY_COLORS[cityData.city] || DEFAULT_COLOR).replace('#', '%23');
-            const customIcon = new BMapGL.Icon(
-                `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="${color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/><circle fill="rgba(25, 35, 50, 0.8)" cx="12" cy="9.5" r="1.5"/></svg>`,
-                new BMapGL.Size(28, 28), { anchor: new BMapGL.Size(14, 28) }
-            );
+            const icon = getCityIcon(cityData.city);
             cityData.districts.forEach(districtData => {
                 districtData.projects.forEach(project => {
                     try {
                         const point = new BMapGL.Point(project.longitude, project.latitude);
-                        const marker = new BMapGL.Marker(point, { enableDragging: false, icon: customIcon });
+                        const marker = new BMapGL.Marker(point, { enableDragging: false, icon });
                         map.addOverlay(marker);
 
-                        // 弹窗内容：多链接编号展示
                         const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
                         let linksHtml = '';
                         if (urls.length === 0) {
                             linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
                         } else if (urls.length === 1) {
-                            linksHtml = `<p><a href="${urls[0]} rel="noopener noreferrer">点击进入720全景</a></p>`;
+                            linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
                         } else {
                             urls.forEach((u, i) => {
-                                linksHtml += `<p><a href="${u} rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
+                                linksHtml += `<p><a href="${u}" rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
                             });
                         }
                         const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
@@ -271,18 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         console.info('地图标记点添加:', markerCount);
-    }
-
-    // ==================== 新增辅助函数 ====================
-    function getProjectById(id) {
-        for (const city of allData) {
-            for (const district of city.districts) {
-                for (const project of district.projects) {
-                    if (project.id === id) return project;
-                }
-            }
-        }
-        return null;
     }
 
     function getChildProjectIds(parentId) {
@@ -308,12 +268,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupInteractions() {
         const searchBox = document.getElementById('search-box');
         const modeToggle = document.getElementById('mode-toggle');
-        const selectors = {
-            allLis: () => treeContainer.querySelectorAll('li'),
-            projects: () => treeContainer.querySelectorAll('.project-item'),
-            provinceCity: () => treeContainer.querySelectorAll('.province-item, .city-item'),
-            province: () => treeContainer.querySelector('.province-item')
-        };
 
         if (modeToggle) {
             modeToggle.addEventListener('click', () => {
@@ -330,35 +284,31 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('未找到模式切换按钮');
         }
 
-        // ==================== 修改点 2：点击事件 ====================
         treeContainer.addEventListener('click', function (event) {
             const target = event.target;
 
-            // 项目点击：不跳转，只定位 + 弹窗
+            // 项目点击
             const projectLink = target.closest('.project-link');
             if (projectLink) {
-                event.preventDefault(); // 阻止 javascript:void(0) 默认行为
+                event.preventDefault();
                 const projectId = projectLink.dataset.projectId;
                 const marker = allMapMarkers.get(projectId);
                 if (!map || !marker) return;
 
                 if (map.getInfoWindow()) map.closeInfoWindow();
 
-                const project = getProjectById(projectId);
+                const project = projectCache.get(projectId);
                 if (!project) return;
 
-                const urls = Array.isArray(project.url)
-                    ? project.url.filter(u => u && u.startsWith('http'))
-                    : [];
-
+                const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
                 let linksHtml = '';
                 if (urls.length === 0) {
                     linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
                 } else if (urls.length === 1) {
-                    linksHtml = `<p><a href="${urls[0]} rel="noopener noreferrer">点击进入720全景</a></p>`;
+                    linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
                 } else {
                     urls.forEach((u, i) => {
-                        linksHtml += `<p><a href="${u} rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
+                        linksHtml += `<p><a href="${u}" rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
                     });
                 }
 
@@ -374,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // 2. 展开/折叠标题点击
+            // 展开/折叠
             const clickableTitle = target.closest('.clickable-title');
             if (clickableTitle) {
                 const parent = clickableTitle.closest('li');
@@ -398,8 +348,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         subLi.querySelectorAll('ul li').forEach(subSubLi => subSubLi.style.display = 'none');
                     });
                 }
-                const itemId = parent.dataset.itemId || parent.querySelector('.clickable-title span').textContent;
-                const item = flatTreeData.find(i => i.id === itemId || i.name === itemId);
+                const itemId = parent.dataset.itemId;
+                const item = flatTreeData.find(i => i.id === itemId);
                 if (item) {
                     const projectIds = getChildProjectIds(item.id);
                     updateMapMarkersVisibility(projectIds);
@@ -407,18 +357,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // ==================== 修改点 2：setupInteractions 中的 filterTree ====================
         function filterTree(searchTerm) {
             const visibleIds = [];
             const noResults = document.querySelector('.no-results');
             if (noResults) noResults.remove();
 
-            const allLis = selectors.allLis();
-            const projects = selectors.projects();
-
             if (searchTerm === '') {
-                // 恢复默认折叠状态
-                allLis.forEach(li => li.style.display = 'none');
+                document.querySelectorAll('li').forEach(li => li.style.display = 'none');
                 document.querySelectorAll('.province-item, .city-item, .level-category-item').forEach(li => {
                     li.style.display = 'block';
                     li.classList.remove('expanded');
@@ -434,17 +379,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 })));
                 visibleIds.push(...foundProjectIds);
 
-                // 先隐藏所有
-                allLis.forEach(li => li.style.display = 'none');
+                document.querySelectorAll('li').forEach(li => li.style.display = 'none');
 
                 let hasResults = false;
-                projects.forEach(projectLi => {
+                document.querySelectorAll('.project-item').forEach(projectLi => {
                     const link = projectLi.querySelector('.project-link');
                     if (link && link.textContent.toLowerCase().includes(searchTerm)) {
                         hasResults = true;
                         projectLi.style.display = 'block';
 
-                        // 递归显示所有父层级
                         let parent = projectLi.parentElement;
                         while (parent && parent.tagName === 'UL') {
                             const parentLi = parent.parentElement;
@@ -474,24 +417,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateMapMarkersVisibility(visibleIds) {
-        const visibleIdSet = new Set(visibleIds);
-        allMapMarkers.forEach((marker, id) => marker[visibleIdSet.has(id) || (!document.getElementById('search-box').value.trim() && !visibleIds.length) ? 'show' : 'hide']());
-        console.info('更新标记点显隐:', visibleIdSet.size);
+        const visibleSet = new Set(visibleIds);
+        if (visibleSet.size === lastVisible.size && [...visibleSet].every(id => lastVisible.has(id))) return;
+
+        allMapMarkers.forEach((marker, id) => {
+            marker[visibleSet.has(id) ? 'show' : 'hide']();
+        });
+        lastVisible = new Set(visibleSet);
+        console.info('更新标记点显隐:', visibleSet.size);
     }
 
     initialize();
-
-    // ==================== 优化：添加缓存 ====================
-    let projectCache = new Map();  // id -> project, O(1) 查询
-    let cachedNodes = [];          // 预取所有 li 节点
-
-    // 在 initialize() 末尾添加：
-    allData.forEach(city => {
-        city.districts.forEach(district => {
-            district.projects.forEach(project => {
-                projectCache.set(project.id, project);
-            });
-        });
-    });
-    cachedNodes = Array.from(treeContainer.querySelectorAll('li'));  // 一次性预取
 });

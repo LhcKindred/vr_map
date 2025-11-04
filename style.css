@@ -6,22 +6,21 @@
 }
 
 :root {
-    --primary-color: #40c4ff; /* 主色：明亮蓝色 */
-    --accent-color: #ffd700; /* 金色辅助色 */
+    --primary-color: #40c4ff;
+    --accent-color: #ffd700;
     --bg-gradient: linear-gradient(135deg, #1e2a44 0%, #0d1a2d 100%);
-    --sidebar-bg: rgba(25, 35, 50, 0.85); /* 侧边栏背景，透明 */
+    --sidebar-bg: rgba(25, 35, 50, 0.85);
     --text-color: #e0e0e0;
-    --hover-bg: rgba(64, 196, 255, 0.2); /* 更深的hover背景 */
+    --hover-bg: rgba(64, 196, 255, 0.2);
     --hover-border: #40c4ff;
     --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
-    --level-0-color: #ffffff; /* 省级：纯白 */
-    --level-1-color: #b3e5fc; /* 市级：浅蓝 */
-    --level-2-color: #d0d9e0; /* 区县：浅灰蓝 */
+    --level-0-color: #ffffff;
+    --level-1-color: #b3e5fc;
+    --level-2-color: #d0d9e0;
     --level-1-bg: rgba(64, 196, 255, 0.05);
     --level-2-bg: rgba(64, 196, 255, 0.02);
     --line-color-city: rgba(64, 196, 255, 0.4);
     --line-color-district: rgba(255, 255, 255, 0.2);
-    --arrow-padding: 15px;
 }
 
 body, h1, h2, ul, li {
@@ -127,7 +126,7 @@ header h1 {
     border-radius: 6px;
 }
 
-/* === 边栏标题（包含模式切换按钮） === */
+/* === 边栏标题 === */
 .sidebar h2 {
     font-size: 1.4rem;
     font-weight: 600;
@@ -144,11 +143,11 @@ header h1 {
 /* === 模式切换按钮 === */
 #mode-toggle {
     background: var(--primary-color);
-    backdrop-filter: blur(8px); /* 与侧边栏毛玻璃一致 */
+    backdrop-filter: blur(8px);
     color: #fff;
     border: 1px solid transparent;
-    padding: 6px 12px; /* 缩小以适应标题行 */
-    border-radius: 16px; /* 更圆润 */
+    padding: 6px 12px;
+    border-radius: 16px;
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 600;
@@ -227,18 +226,34 @@ header h1 {
     transition: none;
 }
 
+/* --- 统一箭头样式 --- */
+.clickable-title::before {
+    content: '▶';  /* 修复：使用 Unicode 箭头 */
+    position: absolute;
+    top: 50%;
+    left: var(--arrow-left, 15px);
+    transform: translateY(-50%);
+    transition: transform 0.3s var(--animation-timing);
+    color: var(--accent-color);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.expanded > .clickable-title::before {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* --- 各级缩进变量 --- */
+.province-title { --arrow-left: 15px; }
+.city-title { --arrow-left: 30px; }
+.district-title { --arrow-left: 45px; }
+.level-category-title { --arrow-left: 30px; }
+
 /* --- Level 0: 省份 --- */
 .province-title {
     font-weight: 700;
     color: var(--level-0-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    padding-left: calc(15px + var(--arrow-padding));
-}
-.province-title::before {
-    left: 15px;
-    color: var(--accent-color);
-    font-size: 0.8em;
-    font-weight: bold;
+    padding-left: calc(15px + 20px);
 }
 
 /* --- Level 1: 城市 --- */
@@ -250,13 +265,7 @@ header h1 {
     font-weight: 600;
     color: var(--level-1-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    padding-left: calc(30px + var(--arrow-padding));
-}
-.city-title::before {
-    left: 30px;
-    color: var(--accent-color);
-    font-size: 0.8em;
-    font-weight: bold;
+    padding-left: calc(30px + 20px);
 }
 
 /* --- Level 2: 区县 --- */
@@ -268,13 +277,7 @@ header h1 {
     font-weight: 500;
     color: var(--level-2-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    padding-left: calc(45px + var(--arrow-padding));
-}
-.district-title::before {
-    left: 45px;
-    color: var(--accent-color);
-    font-size: 0.8em;
-    font-weight: bold;
+    padding-left: calc(45px + 20px);
 }
 
 /* --- Level 1: 级别模式类别 --- */
@@ -282,36 +285,7 @@ header h1 {
     font-weight: 600;
     color: var(--level-1-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    padding-left: calc(30px + var(--arrow-padding));
-}
-.level-category-title::before {
-    left: 30px;
-    content: '▶';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s var(--animation-timing);
-    color: var(--accent-color);
-    font-size: 0.8em;
-    font-weight: bold;
-}
-.level-category-item.expanded > .level-category-title::before {
-    transform: translateY(-50%) rotate(90deg);
-}
-
-/* 箭头动画 */
-.province-title::before, .city-title::before, .district-title::before, .level-category-title::before {
-    content: '▶';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s var(--animation-timing);
-}
-.province-item.expanded > .province-title::before,
-.city-item.expanded > .city-title::before,
-.district-item.expanded > .district-title::before,
-.level-category-item.expanded > .level-category-title::before {
-    transform: translateY(-50%) rotate(90deg);
+    padding-left: calc(30px + 20px);
 }
 
 /* 项目数量角标 */
@@ -349,7 +323,7 @@ header h1 {
     max-height: 50000px;   /* 足够大，永不截断 */
 }
 
-/* 性能优化：硬件加速 */
+/* 性能优化 */
 .cities-list > li,
 .districts-list > li,
 .projects-list > li {
@@ -357,9 +331,9 @@ header h1 {
     will-change: transform;
 }
 
-/* --- Level 3: 项目链接 --- */
+/* === 项目链接（修复悬浮下划线）=== */
 .project-item {
-    padding: 8px 0 8px calc(45px + var(--arrow-padding));
+    padding: 8px 0 8px calc(45px + 20px);
     transition: background 0.25s, transform 0.25s var(--animation-timing);
     border-radius: 5px;
     font-size: 0.9em;
@@ -368,28 +342,34 @@ header h1 {
     background: linear-gradient(90deg, var(--hover-bg), transparent);
     transform: translateX(5px);
 }
-.project-item a {
-    text-decoration: none;
-    color: #b3e5fc;
-    position: relative;
-    transition: color 0.3s ease;
+.project-item a.project-link {
     display: block;
+    padding: 8px 0 8px 20px;
+    color: #b3e5fc;
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.25s;
+    position: relative;
 }
-.project-item a::after {
+.project-item a.project-link:hover {
+    color: #fff;
+}
+
+/* 用户调优：下划线更贴字、长度适中 */
+.project-item a.project-link::after {
     content: '';
     position: absolute;
     width: 0;
     height: 1px;
-    bottom: -2px;
+    bottom: 1px;
     left: 0;
+    right: 10px;
     background: var(--accent-color);
     transition: width 0.3s ease;
 }
-.project-item a:hover::after {
-    width: 100%;
-}
-.project-item a:hover {
-    color: #fff;
+.project-item a.project-link:hover::after {
+    width: calc(100% - 20px);  /* 经验值，视觉完美 */
 }
 
 /* === 地图区域 === */
@@ -540,35 +520,7 @@ header h1 {
     padding: 10px;
 }
 
-
-/* ==================== 优化：项目悬浮和文字对齐 ==================== */
-
-/* 1. 移除 project-link 的 hover 背景和位移（避免重复框体） */
-.project-item a.project-link:hover {
-    background: none !important;
-    transform: none !important;
-    color: #fff !important;
-}
-
-/* 2. 恢复 project-item 的悬浮背景（原逻辑） */
-.project-item:hover {
-    background: linear-gradient(90deg, var(--hover-bg), transparent);
-    transform: translateX(5px);
-    border-radius: 5px;
-}
-
-/* 3. 项目文字对齐（与上级一致，取消多余 padding） */
-.project-item a.project-link {
-    display: block;
-    padding: 8px 0 8px 20px; /* 减少左缩进，与 city/district 对齐 */
-    color: #b3e5fc;
-    text-decoration: none;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: color 0.25s;
-}
-
-/* 4. 多链接角标样式（不变） */
+/* 多链接角标 */
 .multi-count {
     font-size: 0.7em;
     color: var(--accent-color);
