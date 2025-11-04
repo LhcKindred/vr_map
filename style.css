@@ -332,23 +332,29 @@ header h1 {
     transform: scale(1.05);
 }
 
-/* === 展开/闭合动画 === */
-.cities-list, .districts-list, .projects-list {
+/* === 动态展开：支持 300+ 项目 === */
+.cities-list,
+.districts-list,
+.projects-list {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s var(--animation-timing);
+    contain: layout style;
 }
+
 .province-item.expanded > .cities-list,
 .city-item.expanded > .districts-list,
 .district-item.expanded > .projects-list,
 .level-category-item.expanded > .projects-list {
-    max-height: 2000px;
-    display: block;
+    max-height: 50000px;   /* 足够大，永不截断 */
 }
-.cities-list > li, .districts-list > li, .projects-list > li {
-    opacity: 1;
-    transform: none;
-    transition: none;
+
+/* 性能优化：硬件加速 */
+.cities-list > li,
+.districts-list > li,
+.projects-list > li {
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* --- Level 3: 项目链接 --- */
