@@ -115,6 +115,7 @@ for idx, row in df.iterrows():
         continue
 
     print(f"  -> 查询地址: {address}")
+    time.sleep(0.5)  # 避免请求过快
     lng, lat = get_coordinates(address, GAODE_AK)
     if lng is None or lat is None:
         print(f"  -> 坐标获取失败，跳过: {project_name}")
@@ -149,7 +150,7 @@ for idx, row in df.iterrows():
     existing_projects[key] = project_obj
     added_count += 1
 
-    time.sleep(0.5)   # 防频率限制
+    time.sleep(1)   # 防频率限制
 
 # 2. 写回文件（覆盖）
 try:

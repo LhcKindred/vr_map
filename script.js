@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const BAIDU_MAP_AK = '1ufK1yIu2Lu9KhwzciQAGjGNqOu7iKcE';
-    const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784' };
+    const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784', '长治市': '#BA68C8', '运城市': '#FF8A65', '大同市': '#4DB6AC', '阳泉市': '#FFB74D', '朔州市': '#A1887F', '忻州市': '#90A4AE', '临汾市': '#F06292', '晋城市': '#64b605ff' };
     const DEFAULT_COLOR = '#E0E0E0';
 
     // --- 全局变量 ---
@@ -130,9 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const projects = levelGroups.get(levelName) || [];
                 const count = projects.length;
                 const categoryId = `level-${levelName.toLowerCase().slice(0, 3)}`;
-                flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: count, expanded: false, level: 1, parentId: 'shanxi', visible: true }); // 默认折叠
+                flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: count, expanded: false, level: 1, parentId: 'shanxi', visible: true });
                 projects.forEach(project => {
-                    flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 2, parentId: categoryId, visible: false }); // 项目默认隐藏
+                    flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 2, parentId: categoryId, visible: false });
                 });
             });
         }
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     name: project.name,
                     url: project.url
                 })),
-                expanded: false // 默认折叠
+                expanded: false
             }));
             rootUl.appendChild(buildNode('province', 'shanxi', '山西省', allData.reduce((sum, city) => sum + city.districts.reduce((sum, d) => sum + d.projects.length, 0), 0), levelData, true));
         }
@@ -194,24 +194,33 @@ document.addEventListener('DOMContentLoaded', function () {
         // 默认折叠级别模式下的子项目
         if (mode === 'level') {
             treeContainer.querySelectorAll('.level-category-item').forEach(li => {
-                li.classList.remove('expanded'); // 确保折叠
+                li.classList.remove('expanded');
                 const subList = li.querySelector('ul');
                 if (subList) {
                     subList.querySelectorAll('li').forEach(subLi => {
-                        subLi.style.display = 'none'; // 隐藏项目
+                        subLi.style.display = 'none';
                     });
                 }
             });
         }
     }
 
+    // ==================== 修改点 1：buildNode ====================
     function buildNode(type, id, name, projectCount, children = [], expanded = false, url = '') {
         const li = document.createElement('li');
         li.className = `${type}-item${expanded ? ' expanded' : ''}`;
         li.dataset.itemId = id;
-        li.innerHTML = type === 'project'
-            ? `<a href="${url}" data-project-id="${id}">${name}</a>`
-            : `<div class="${type === 'level-category' ? 'level-category-title' : `${type}-title`} clickable-title"><span>${name}</span><span class="project-count">${projectCount || ''}</span></div>`;
+
+        if (type === 'project') {
+            const urlArray = Array.isArray(url) ? url : [];
+            const validCount = urlArray.filter(u => u && typeof u === 'string' && u.startsWith('http')).length;
+            // 使用 <a> 标签，恢复原样式，但不跳转
+            li.innerHTML = `<a href="javascript:void(0)" class="project-link" data-project-id="${id}">${name}${validCount > 1 ? ` <span class="multi-count">[${validCount}]</span>` : ''
+                }</a>`;
+        } else {
+            li.innerHTML = `<div class="${type === 'level-category' ? 'level-category-title' : `${type}-title`} clickable-title"><span>${name}</span><span class="project-count">${projectCount || ''}</span></div>`;
+        }
+
         if (children.length) {
             const ul = document.createElement('ul');
             ul.className = `${type === 'province' ? 'cities' : type === 'city' ? 'districts' : type === 'level-category' ? 'projects' : 'projects'}-list`;
@@ -237,7 +246,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         const point = new BMapGL.Point(project.longitude, project.latitude);
                         const marker = new BMapGL.Marker(point, { enableDragging: false, icon: customIcon });
                         map.addOverlay(marker);
-                        const content = `<div><b>${project.name}</b><p><a href="${project.url}" rel="noopener noreferrer">点击进入720全景</a></p></div>`;
+
+                        // 弹窗内容：多链接编号展示
+                        const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
+                        let linksHtml = '';
+                        if (urls.length === 0) {
+                            linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
+                        } else if (urls.length === 1) {
+                            linksHtml = `<p><a href="${urls[0]} rel="noopener noreferrer">点击进入720全景</a></p>`;
+                        } else {
+                            urls.forEach((u, i) => {
+                                linksHtml += `<p><a href="${u} rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
+                            });
+                        }
+                        const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
+
                         marker.addEventListener("click", () => map.openInfoWindow(new BMapGL.InfoWindow(content), point));
                         allMapMarkers.set(project.id, marker);
                         markerCount++;
@@ -248,6 +271,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         console.info('地图标记点添加:', markerCount);
+    }
+
+    // ==================== 新增辅助函数 ====================
+    function getProjectById(id) {
+        for (const city of allData) {
+            for (const district of city.districts) {
+                for (const project of district.projects) {
+                    if (project.id === id) return project;
+                }
+            }
+        }
+        return null;
     }
 
     function getChildProjectIds(parentId) {
@@ -295,35 +330,51 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('未找到模式切换按钮');
         }
 
+        // ==================== 修改点 2：点击事件 ====================
         treeContainer.addEventListener('click', function (event) {
             const target = event.target;
-            if (target.tagName === 'A' && target.dataset.projectId) {
-                event.preventDefault();
-                const projectId = target.dataset.projectId;
+
+            // 项目点击：不跳转，只定位 + 弹窗
+            const projectLink = target.closest('.project-link');
+            if (projectLink) {
+                event.preventDefault(); // 阻止 javascript:void(0) 默认行为
+                const projectId = projectLink.dataset.projectId;
                 const marker = allMapMarkers.get(projectId);
-                if (map && marker) {
-                    if (map.getInfoWindow()) {
-                        map.closeInfoWindow();
-                    }
-                    const infoWindowContent = `<div><b>${target.textContent}</b><p><a href="${target.href}" rel="noopener noreferrer">点击进入720全景</a></p></div>`;
-                    const executeFlyTo = () => {
-                        try {
-                            map.flyTo(marker.getPosition(), 17, { duration: 800, pitch: 45 });
-                            map.addEventListener('moveend', () => {
-                                map.openInfoWindow(new BMapGL.InfoWindow(infoWindowContent), marker.getPosition());
-                                map.removeEventListener('moveend', arguments.callee);
-                            });
-                        } catch (err) {
-                            console.error('flyTo 执行失败:', err);
-                        }
-                    };
-                    setTimeout(executeFlyTo, 100);
+                if (!map || !marker) return;
+
+                if (map.getInfoWindow()) map.closeInfoWindow();
+
+                const project = getProjectById(projectId);
+                if (!project) return;
+
+                const urls = Array.isArray(project.url)
+                    ? project.url.filter(u => u && u.startsWith('http'))
+                    : [];
+
+                let linksHtml = '';
+                if (urls.length === 0) {
+                    linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
+                } else if (urls.length === 1) {
+                    linksHtml = `<p><a href="${urls[0]} rel="noopener noreferrer">点击进入720全景</a></p>`;
                 } else {
-                    console.error('点击失败: 地图或标记未准备好', { projectId, markerExists: !!marker, mapExists: !!map });
+                    urls.forEach((u, i) => {
+                        linksHtml += `<p><a href="${u} rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
+                    });
                 }
+
+                const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
+                const point = marker.getPosition();
+
+                map.flyTo(point, 17, { duration: 800, pitch: 45 });
+                map.addEventListener('moveend', function handler() {
+                    map.openInfoWindow(new BMapGL.InfoWindow(content), point);
+                    map.removeEventListener('moveend', handler);
+                });
+
                 return;
             }
 
+            // 2. 展开/折叠标题点击
             const clickableTitle = target.closest('.clickable-title');
             if (clickableTitle) {
                 const parent = clickableTitle.closest('li');
@@ -356,6 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        // ==================== 修改点 2：setupInteractions 中的 filterTree ====================
         function filterTree(searchTerm) {
             const visibleIds = [];
             const noResults = document.querySelector('.no-results');
@@ -363,27 +415,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const allLis = selectors.allLis();
             const projects = selectors.projects();
-            const provinceCity = selectors.provinceCity();
-            const province = selectors.province();
 
             if (searchTerm === '') {
+                // 恢复默认折叠状态
                 allLis.forEach(li => li.style.display = 'none');
-                provinceCity.forEach(li => {
+                document.querySelectorAll('.province-item, .city-item, .level-category-item').forEach(li => {
                     li.style.display = 'block';
                     li.classList.remove('expanded');
-                    const subList = li.querySelector('ul');
-                    if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
+                    const ul = li.querySelector('ul');
+                    if (ul) ul.querySelectorAll('li').forEach(sub => sub.style.display = 'none');
                 });
-                if (province) province.classList.add('expanded');
-                if (mode === 'level') {
-                    treeContainer.querySelectorAll('.level-category-item').forEach(li => {
-                        li.style.display = 'block';
-                        li.classList.remove('expanded'); // 默认折叠
-                        const subList = li.querySelector('ul');
-                        if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
-                    });
-                }
-                visibleIds.push(...flatTreeData.filter(item => item.type === 'project').map(item => item.id));
+                document.querySelector('.province-item')?.classList.add('expanded');
+                visibleIds.push(...flatTreeData.filter(i => i.type === 'project').map(i => i.id));
             } else {
                 const foundProjectIds = new Set();
                 allData.forEach(city => city.districts.forEach(d => d.projects.forEach(p => {
@@ -391,33 +434,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 })));
                 visibleIds.push(...foundProjectIds);
 
+                // 先隐藏所有
                 allLis.forEach(li => li.style.display = 'none');
+
                 let hasResults = false;
                 projects.forEach(projectLi => {
-                    const a = projectLi.querySelector('a');
-                    if (a?.textContent.toLowerCase().includes(searchTerm)) {
+                    const link = projectLi.querySelector('.project-link');
+                    if (link && link.textContent.toLowerCase().includes(searchTerm)) {
                         hasResults = true;
                         projectLi.style.display = 'block';
-                        let parent = projectLi.closest('.district-item, .level-category-item');
-                        if (parent) {
-                            parent.style.display = 'block';
-                            parent.classList.add('expanded'); // 搜索时展开匹配类别
-                            const subList = parent.querySelector('ul');
-                            if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
-                            projectLi.style.display = 'block';
-                            parent = parent.closest('.city-item, .province-item');
-                            if (parent) {
-                                parent.style.display = 'block';
-                                parent.classList.add('expanded');
-                                parent = parent.closest('.province-item');
-                                if (parent) parent.style.display = 'block';
+
+                        // 递归显示所有父层级
+                        let parent = projectLi.parentElement;
+                        while (parent && parent.tagName === 'UL') {
+                            const parentLi = parent.parentElement;
+                            if (parentLi) {
+                                parentLi.style.display = 'block';
+                                parentLi.classList.add('expanded');
                             }
+                            parent = parentLi?.parentElement;
                         }
                     }
                 });
-                if (!hasResults) console.info('搜索无结果:', searchTerm);
 
-                if (foundProjectIds.size === 0 && searchTerm) {
+                if (!hasResults && searchTerm) {
                     const p = document.createElement('p');
                     p.className = 'no-results';
                     p.style.cssText = 'color: #ffd700; text-align: center; padding: 10px;';
@@ -440,4 +480,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initialize();
+
+    // ==================== 优化：添加缓存 ====================
+    let projectCache = new Map();  // id -> project, O(1) 查询
+    let cachedNodes = [];          // 预取所有 li 节点
+
+    // 在 initialize() 末尾添加：
+    allData.forEach(city => {
+        city.districts.forEach(district => {
+            district.projects.forEach(project => {
+                projectCache.set(project.id, project);
+            });
+        });
+    });
+    cachedNodes = Array.from(treeContainer.querySelectorAll('li'));  // 一次性预取
 });

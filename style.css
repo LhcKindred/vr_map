@@ -533,3 +533,42 @@ header h1 {
     text-align: center;
     padding: 10px;
 }
+
+
+/* ==================== 优化：项目悬浮和文字对齐 ==================== */
+
+/* 1. 移除 project-link 的 hover 背景和位移（避免重复框体） */
+.project-item a.project-link:hover {
+    background: none !important;
+    transform: none !important;
+    color: #fff !important;
+}
+
+/* 2. 恢复 project-item 的悬浮背景（原逻辑） */
+.project-item:hover {
+    background: linear-gradient(90deg, var(--hover-bg), transparent);
+    transform: translateX(5px);
+    border-radius: 5px;
+}
+
+/* 3. 项目文字对齐（与上级一致，取消多余 padding） */
+.project-item a.project-link {
+    display: block;
+    padding: 8px 0 8px 20px; /* 减少左缩进，与 city/district 对齐 */
+    color: #b3e5fc;
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.25s;
+}
+
+/* 4. 多链接角标样式（不变） */
+.multi-count {
+    font-size: 0.7em;
+    color: var(--accent-color);
+    background: rgba(255, 215, 0, 0.2);
+    padding: 1px 4px;
+    border-radius: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
