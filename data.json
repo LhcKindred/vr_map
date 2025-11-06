@@ -4610,7 +4610,7 @@
               "https://www.720yun.com/t/bcakiwdmrf9"
             ],
             "longitude": 112.838555,
-            "latitude": 35.512520,
+            "latitude": 35.51252,
             "protectionLevel": "省保"
           },
           {
@@ -4620,7 +4620,7 @@
               "https://www.720yun.com/t/dcaknliyzqh"
             ],
             "longitude": 112.851924,
-            "latitude": 35.502830,
+            "latitude": 35.50283,
             "protectionLevel": "国保"
           }
         ]
@@ -8134,6 +8134,14 @@
             "longitude": 111.1443775939258,
             "latitude": 35.26711151028338,
             "protectionLevel": "未定级"
+          },
+          {
+            "id": "运城市-夏县-733",
+            "name": "夏县文庙大成殿",
+            "url": "https://www.720yun.com/t/d2akiw1bdf9",
+            "longitude": 111.23147565134265,
+            "latitude": 35.140713935661694,
+            "protectionLevel": "国保"
           }
         ]
       },
