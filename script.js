@@ -220,17 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const marker = new BMapGL.Marker(point, { enableDragging: false, icon });
                         map.addOverlay(marker);
 
-                        const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
-                        let linksHtml = '';
-                        if (urls.length === 0) {
-                            linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
-                        } else if (urls.length === 1) {
-                            linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
-                        } else {
-                            urls.forEach((u, i) => {
-                                linksHtml += `<p><a href="${u}" rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
-                            });
-                        }
+                        const linksHtml = generateLinksHtml(project);
                         const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
 
                         marker.addEventListener("click", () => map.openInfoWindow(new BMapGL.InfoWindow(content), point));
@@ -300,17 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const project = projectCache.get(projectId);
                 if (!project) return;
 
-                const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
-                let linksHtml = '';
-                if (urls.length === 0) {
-                    linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
-                } else if (urls.length === 1) {
-                    linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
-                } else {
-                    urls.forEach((u, i) => {
-                        linksHtml += `<p><a href="${u}" rel="noopener noreferrer">全景 ${i + 1}</a></p>`;
-                    });
-                }
+                const linksHtml = generateLinksHtml(project);
 
                 const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
                 const point = marker.getPosition();
@@ -425,6 +405,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         lastVisible = new Set(visibleSet);
         console.info('更新标记点显隐:', visibleSet.size);
+    }
+
+    function generateLinksHtml(project) {
+        const urls = Array.isArray(project.url) ? project.url.filter(u => u && u.startsWith('http')) : [];
+        let linksHtml = '';
+        if (urls.length === 0) {
+            linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
+        } else if (urls.length === 1) {
+            linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
+        } else {
+            // 新增：检查 url_names
+            const urlNames = project.url_names || []; // 可选字段，默认空数组
+            urls.forEach((u, i) => {
+                const name = urlNames[i] || `全景 ${i + 1}`; // 优先用名字，fallback 旧标签
+                linksHtml += `<p><a href="${u}" rel="noopener noreferrer">${name}</a></p>`;
+            });
+        }
+        return linksHtml;
     }
 
     initialize();
