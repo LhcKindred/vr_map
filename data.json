@@ -4232,10 +4232,10 @@
     "city": "晋城市",
     "districts": [
       {
-        "district": "陵川",
+        "district": "陵川县",
         "projects": [
           {
-            "id": "晋城市-陵川-374",
+            "id": "晋城市-陵川县-374",
             "name": "南庙宫",
             "url": [
               "https://www.720yun.com/t/51akn7ihpdl"
@@ -4245,7 +4245,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-375",
+            "id": "晋城市-陵川县-375",
             "name": "德义先师庙",
             "url": [
               "https://www.720yun.com/t/dfakn7iqrdw"
@@ -4255,17 +4255,17 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-376",
+            "id": "晋城市-陵川县-376",
             "name": "西尧观音殿",
             "url": [
               "https://www.720yun.com/t/a4akn7iqd2m"
             ],
-            "longitude": 113.16229275284552,
-            "latitude": 35.842361226076335,
+            "longitude": 113.159936,
+            "latitude": 35.841719,
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-377",
+            "id": "晋城市-陵川县-377",
             "name": "礼义会馆",
             "url": [
               "https://www.720yun.com/t/26akn7iqdpq"
@@ -4275,7 +4275,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-378",
+            "id": "晋城市-陵川县-378",
             "name": "黄庄节孝牌坊",
             "url": [
               "https://www.720yun.com/t/a5aknqpqgfy"
@@ -4285,7 +4285,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-379",
+            "id": "晋城市-陵川县-379",
             "name": "积善遇真观",
             "url": [
               "https://www.720yun.com/t/0cakn7ih5re"
@@ -4295,7 +4295,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-陵川-380",
+            "id": "晋城市-陵川县-380",
             "name": "南召文庙",
             "url": [
               "https://www.720yun.com/t/82vkt717O2q"
@@ -4305,7 +4305,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-381",
+            "id": "晋城市-陵川县-381",
             "name": "北马玉皇庙",
             "url": [
               "https://www.720yun.com/t/0avktq8e0dw"
@@ -4315,7 +4315,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-382",
+            "id": "晋城市-陵川县-382",
             "name": "南北吉祥寺",
             "url": [
               "https://www.720yun.com/t/b1vkcyplsr9",
@@ -4326,7 +4326,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-383",
+            "id": "晋城市-陵川县-383",
             "name": "西溪二仙庙",
             "url": [
               "https://www.720yun.com/t/11vkc91mgrm"
@@ -4336,7 +4336,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-384",
+            "id": "晋城市-陵川县-384",
             "name": "龙岩寺",
             "url": [
               "https://www.720yun.com/t/7evktqry0ie"
@@ -4346,7 +4346,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-385",
+            "id": "晋城市-陵川县-385",
             "name": "崔府君庙",
             "url": [
               "https://www.720yun.com/t/27vktqrwp2b"
@@ -4356,7 +4356,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-386",
+            "id": "晋城市-陵川县-386",
             "name": "玉泉东岳庙",
             "url": [
               "https://www.720yun.com/t/d3vktqrls17"
@@ -4366,7 +4366,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-387",
+            "id": "晋城市-陵川县-387",
             "name": "石掌玉皇庙",
             "url": [
               "https://www.720yun.com/t/a8vktq8wOrm"
@@ -4376,7 +4376,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-388",
+            "id": "晋城市-陵川县-388",
             "name": "白玉宫",
             "url": [
               "https://www.720yun.com/t/f0vktm895ry"
@@ -4386,7 +4386,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-389",
+            "id": "晋城市-陵川县-389",
             "name": "南神头二仙庙",
             "url": [
               "https://www.720yun.com/t/69vkcy8qzdq"
@@ -4396,7 +4396,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-390",
+            "id": "晋城市-陵川县-390",
             "name": "寺润三教堂",
             "url": [
               "https://www.720yun.com/t/5cvkcy7y58l"
@@ -4406,7 +4406,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-391",
+            "id": "晋城市-陵川县-391",
             "name": "三圣瑞现塔",
             "url": [
               "https://www.720yun.com/t/5eakn7ihg7m"
@@ -4416,7 +4416,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-陵川-392",
+            "id": "晋城市-陵川县-392",
             "name": "崇安寺",
             "url": [
               "https://www.720yun.com/t/2bvkcyrlOqm"
@@ -4424,14 +4424,74 @@
             "longitude": 113.28436253457275,
             "latitude": 35.78404570303595,
             "protectionLevel": "国保"
+          },
+          {
+            "id": "晋城市-陵川县-506",
+            "name": "田庄全神庙",
+            "url": [
+              "https://www.720yun.com/t/9avk6biepqe?scene_id=108964095"
+            ],
+            "longitude": 113.18730522942626,
+            "latitude": 35.74097532692211,
+            "protectionLevel": "国保"
+          },
+          {
+            "id": "晋城市-陵川县-507",
+            "name": "小会岭二仙庙",
+            "url": [
+              "https://www.720yun.com/t/8cvktq89gfb?scene_id=73939869"
+            ],
+            "longitude": 113.18168257868054,
+            "latitude": 35.68452950106789,
+            "protectionLevel": "国保"
+          },
+          {
+            "id": "晋城市-陵川县-533",
+            "name": "小河西村三教堂",
+            "url": [
+              "https://www.720yun.com/t/51vk6bieprh?scene_id=108964677"
+            ],
+            "longitude": 113.28716141092535,
+            "latitude": 35.781582888492636,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋城市-陵川县-534",
+            "name": "苏家掌村关帝庙",
+            "url": [
+              "https://www.720yun.com/t/davk6bder2m?scene_id=109064881"
+            ],
+            "longitude": 113.13138089256358,
+            "latitude": 35.80651548019201,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋城市-陵川县-535",
+            "name": "庄上村三圣庙",
+            "url": [
+              "https://www.720yun.com/t/73vk6bded8m?scene_id=109065879"
+            ],
+            "longitude": 113.28716141092535,
+            "latitude": 35.781582888492636,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋城市-陵川县-536",
+            "name": "香铺窑村大庙",
+            "url": [
+              "https://www.720yun.com/t/5avk6bie5rl?scene_id=108963515"
+            ],
+            "longitude": 113.24575649192464,
+            "latitude": 35.604202272298224,
+            "protectionLevel": "市保"
           }
         ]
       },
       {
-        "district": "沁水",
+        "district": "沁水县",
         "projects": [
           {
-            "id": "晋城市-沁水-393",
+            "id": "晋城市-沁水县-393",
             "name": "玉溪石塔",
             "url": [
               "https://www.720yun.com/t/d2akn7red7y"
@@ -4441,7 +4501,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-394",
+            "id": "晋城市-沁水县-394",
             "name": "上阁龙岩寺",
             "url": [
               "https://www.720yun.com/t/54akn7rerfy"
@@ -4451,7 +4511,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-395",
+            "id": "晋城市-沁水县-395",
             "name": "上木亭大庙",
             "url": [
               "https://www.720yun.com/t/55akn7rer7w"
@@ -4461,7 +4521,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-396",
+            "id": "晋城市-沁水县-396",
             "name": "下李庄二郎神庙",
             "url": [
               "https://www.720yun.com/t/02akn7rysql"
@@ -4471,7 +4531,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-397",
+            "id": "晋城市-沁水县-397",
             "name": "嘉峰汤帝庙",
             "url": [
               "https://www.720yun.com/t/b0akn7rlzdw"
@@ -4481,7 +4541,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-398",
+            "id": "晋城市-沁水县-398",
             "name": "武安惠济寺",
             "url": [
               "https://www.720yun.com/t/97akn7rl0f9"
@@ -4491,7 +4551,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-399",
+            "id": "晋城市-沁水县-399",
             "name": "武安关帝庙",
             "url": [
               "https://www.720yun.com/t/d8akn7rls7l"
@@ -4501,7 +4561,7 @@
             "protectionLevel": "省保"
           },
           {
-            "id": "晋城市-沁水-400",
+            "id": "晋城市-沁水县-400",
             "name": "窦庄古建筑群（16）",
             "url": [
               "https://www.720yun.com/t/d4akn717O79",
@@ -4527,7 +4587,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-沁水-401",
+            "id": "晋城市-沁水县-401",
             "name": "柳氏民居",
             "url": [
               "https://www.720yun.com/t/a9aknq7lpr7",
@@ -4547,7 +4607,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-沁水-402",
+            "id": "晋城市-沁水县-402",
             "name": "湘峪古堡",
             "url": [
               "https://www.720yun.com/t/0baknq8w7pb",
@@ -4565,7 +4625,7 @@
             "protectionLevel": "国保"
           },
           {
-            "id": "晋城市-沁水-403",
+            "id": "晋城市-沁水县-403",
             "name": "郭壁村古建筑群",
             "url": [
               "https://www.720yun.com/t/c9akn71w7i7",
@@ -4577,6 +4637,46 @@
             "longitude": 112.98696990049675,
             "latitude": 35.453215748408304,
             "protectionLevel": "国保"
+          },
+          {
+            "id": "晋城市-沁水县-503",
+            "name": "中国抗日军政大学太岳分校旧址",
+            "url": [
+              "https://www.720yun.com/t/5eakne8b57l"
+            ],
+            "longitude": 112.1242575685228,
+            "latitude": 35.51489433418182,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "晋城市-沁水县-508",
+            "name": "石室村西庙",
+            "url": [
+              "https://www.720yun.com/t/e8aknl1bpqe"
+            ],
+            "longitude": 112.36255763732828,
+            "latitude": 35.779442589891275,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋城市-沁水县-509",
+            "name": "中村镇西沟关帝庙",
+            "url": [
+              "https://www.720yun.com/t/f1akne87z8h"
+            ],
+            "longitude": 112.0686124837913,
+            "latitude": 35.64832874913521,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋城市-沁水县-510",
+            "name": "樊山老姆掌",
+            "url": [
+              "https://www.720yun.com/t/05aknliygfy"
+            ],
+            "longitude": 112.61793086841011,
+            "latitude": 35.554937507125786,
+            "protectionLevel": "市保"
           }
         ]
       },
@@ -5748,116 +5848,6 @@
             ],
             "longitude": 112.86065727029451,
             "latitude": 35.69919974802081,
-            "protectionLevel": "市保"
-          }
-        ]
-      },
-      {
-        "district": "沁水县",
-        "projects": [
-          {
-            "id": "晋城市-沁水县-503",
-            "name": "中国抗日军政大学太岳分校旧址",
-            "url": [
-              "https://www.720yun.com/t/5eakne8b57l"
-            ],
-            "longitude": 112.1242575685228,
-            "latitude": 35.51489433418182,
-            "protectionLevel": "省保"
-          },
-          {
-            "id": "晋城市-沁水县-508",
-            "name": "石室村西庙",
-            "url": [
-              "https://www.720yun.com/t/e8aknl1bpqe"
-            ],
-            "longitude": 112.36255763732828,
-            "latitude": 35.779442589891275,
-            "protectionLevel": "未定级"
-          },
-          {
-            "id": "晋城市-沁水县-509",
-            "name": "中村镇西沟关帝庙",
-            "url": [
-              "https://www.720yun.com/t/f1akne87z8h"
-            ],
-            "longitude": 112.0686124837913,
-            "latitude": 35.64832874913521,
-            "protectionLevel": "未定级"
-          },
-          {
-            "id": "晋城市-沁水县-510",
-            "name": "樊山老姆掌",
-            "url": [
-              "https://www.720yun.com/t/05aknliygfy"
-            ],
-            "longitude": 112.61793086841011,
-            "latitude": 35.554937507125786,
-            "protectionLevel": "市保"
-          }
-        ]
-      },
-      {
-        "district": "陵川县",
-        "projects": [
-          {
-            "id": "晋城市-陵川县-506",
-            "name": "田庄全神庙",
-            "url": [
-              "https://www.720yun.com/t/9avk6biepqe?scene_id=108964095"
-            ],
-            "longitude": 113.18730522942626,
-            "latitude": 35.74097532692211,
-            "protectionLevel": "国保"
-          },
-          {
-            "id": "晋城市-陵川县-507",
-            "name": "小会岭二仙庙",
-            "url": [
-              "https://www.720yun.com/t/8cvktq89gfb?scene_id=73939869"
-            ],
-            "longitude": 113.18168257868054,
-            "latitude": 35.68452950106789,
-            "protectionLevel": "国保"
-          },
-          {
-            "id": "晋城市-陵川县-533",
-            "name": "小河西村三教堂",
-            "url": [
-              "https://www.720yun.com/t/51vk6bieprh?scene_id=108964677"
-            ],
-            "longitude": 113.28716141092535,
-            "latitude": 35.781582888492636,
-            "protectionLevel": "未定级"
-          },
-          {
-            "id": "晋城市-陵川县-534",
-            "name": "苏家掌村关帝庙",
-            "url": [
-              "https://www.720yun.com/t/davk6bder2m?scene_id=109064881"
-            ],
-            "longitude": 113.13138089256358,
-            "latitude": 35.80651548019201,
-            "protectionLevel": "未定级"
-          },
-          {
-            "id": "晋城市-陵川县-535",
-            "name": "庄上村三圣庙",
-            "url": [
-              "https://www.720yun.com/t/73vk6bded8m?scene_id=109065879"
-            ],
-            "longitude": 113.28716141092535,
-            "latitude": 35.781582888492636,
-            "protectionLevel": "未定级"
-          },
-          {
-            "id": "晋城市-陵川县-536",
-            "name": "香铺窑村大庙",
-            "url": [
-              "https://www.720yun.com/t/5avk6bie5rl?scene_id=108963515"
-            ],
-            "longitude": 113.24575649192464,
-            "latitude": 35.604202272298224,
             "protectionLevel": "市保"
           }
         ]
