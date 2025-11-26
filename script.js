@@ -56,7 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 2. 准备图层
             const satelliteLayer = new AMapObj.TileLayer.Satellite();   //卫星底图
-            const roadNetLayer = new AMapObj.TileLayer.RoadNet();   //路网图层
+            const roadNetLayer = new AMapObj.TileLayer.RoadNet({
+                zooms: [1, 2],
+                opacity: 0.7
+            });     //路网叠加图层  调整zooms到顶层，使正常观看时不显示路网
 
             // 3. 初始化地图实例
             const centerPoint = bd09ToGcj02(112.55, 37.87);
