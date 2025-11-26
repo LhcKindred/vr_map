@@ -4,13 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="山西省VR全景项目地图，提供项目列表和百度地图交互。">
-    <meta name="keywords" content="山西VR全景, 百度地图, 项目地图">
-    <meta https-equiv="Content-Security-Policy"
-        content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.map.baidu.com https://*.map.baidu.com https://*.bdimg.com https://*.baidu.com; style-src 'self' 'unsafe-inline' https://api.map.baidu.com https://*.map.baidu.com https://*.bdimg.com; img-src 'self' data: blob: https://api.map.baidu.com https://*.map.baidu.com https://*.bdimg.com https://*.baidu.com; connect-src 'self' data: blob: https://api.map.baidu.com https://*.map.baidu.com https://*.bdimg.com https://*.baidu.com; font-src 'self' data: https://api.map.baidu.com https://*.map.baidu.com https://*.bdimg.com; worker-src 'self' blob:; child-src 'self' blob:;">
+    <meta name="description" content="山西省VR全景项目地图，提供项目列表和高德地图交互。">
+    <meta name="keywords" content="山西VR全景, 高德地图, 项目地图">
+    <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' data: blob:; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.amap.com https://webapi.amap.com https://*.autonavi.com; 
+    style-src 'self' 'unsafe-inline' https://*.amap.com https://*.autonavi.com; 
+    img-src 'self' data: blob: https://*.amap.com https://webapi.amap.com https://*.autonavi.com; 
+    connect-src 'self' data: blob: https://*.amap.com https://webapi.amap.com https://*.autonavi.com; 
+    font-src 'self' data: https://*.amap.com https://*.autonavi.com; 
+    worker-src 'self' blob:; 
+    child-src 'self' blob:;">
     <title>山西省VR全景项目地图</title>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '057239ebb8b4cf482bfe9d3341599588',
+        }
+    </script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <script src="https://webapi.amap.com/loader.js"></script>
 </head>
 
 <body>
@@ -31,12 +44,7 @@
                 </div>
             </div>
         </nav>
-        <div id="map-container" class="map-area">
-            <!-- <div class="loading">
-                <div class="spinner"></div>
-                <span>正在加载地图...</span>
-            </div> -->
-        </div>
+        <div id="map-container" class="map-area"></div>
     </main>
     <script src="script.js"></script>
 </body>

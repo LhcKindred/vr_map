@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const BAIDU_MAP_AK = '1ufK1yIu2Lu9KhwzciQAGjGNqOu7iKcE';
+    // --- 配置 ---
+    const AMAP_KEY = '49bc17f19355b82c1e96e469af87e4f9';
+
     const CITY_COLORS = { '太原市': '#40C4FF', '吕梁市': '#FFD700', '晋中市': '#81C784', '长治市': '#BA68C8', '运城市': '#FF8A65', '大同市': '#4DB6AC', '阳泉市': '#FFB74D', '朔州市': '#A1887F', '忻州市': '#90A4AE', '临汾市': '#F06292', '晋城市': '#64b605ff' };
     const DEFAULT_COLOR = '#E0E0E0';
 
@@ -8,7 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const treeContainer = document.getElementById('tree-container');
     const sidebar = document.getElementById('tree-menu');
     const toggleButton = document.querySelector('.toggle-sidebar');
-    let map, allMapMarkers = new Map(), allData = [], flatTreeData = [];
+
+    let map;
+    let AMapObj; // 保存加载后的 AMap 对象引用
+    let allMapMarkers = new Map();
+    let allData = [], flatTreeData = [];
     let mode = 'geo'; // 默认地理模式
     const LEVELS = ['国保', '省保', '市保', '县保', '未定级'];
 
@@ -16,34 +22,68 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectCache = new Map();
     const iconCache = new Map();
     let lastVisible = new Set();
+    let currentInfoWindow = null;
 
     // --- 侧边栏切换 ---
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('active');
         toggleButton.textContent = sidebar.classList.contains('active') ? '✕' : '☰';
-        toggleButton.setAttribute('aria-label', sidebar.classList.contains('active') ? '关闭侧边栏' : '打开侧边栏');
     });
+
+    // --- 坐标转换工具 (百度 BD-09 -> 高德 GCJ-02) ---
+    function bd09ToGcj02(bd_lon, bd_lat) {
+        const x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        const x = bd_lon - 0.0065;
+        const y = bd_lat - 0.006;
+        const z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);
+        const theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);
+        const gg_lon = z * Math.cos(theta);
+        const gg_lat = z * Math.sin(theta);
+        return [gg_lon, gg_lat];
+    }
 
     // --- 初始化 ---
     async function initialize() {
-        if (!mapContainer || !treeContainer || !sidebar || !toggleButton) {
-            console.error('初始化失败：缺少核心DOM元素');
-            return;
-        }
-        try {
-            await loadBMap();
-            map = new BMapGL.Map('map-container');
-            map.centerAndZoom(new BMapGL.Point(112.55, 37.87), 8);
-            map.enableScrollWheelZoom(true);
-            map.setMapType(BMAP_EARTH_MAP);
+        if (!mapContainer || !treeContainer) return;
 
+        try {
+            // 1. 加载高德地图 API
+            AMapObj = await AMapLoader.load({
+                key: AMAP_KEY,
+                version: "2.0",
+                plugins: ['AMap.Scale', 'AMap.ToolBar', 'AMap.TileLayer', 'AMap.MapType']
+            });
+
+            // 2. 准备图层
+            const satelliteLayer = new AMapObj.TileLayer.Satellite();   //卫星底图
+            const roadNetLayer = new AMapObj.TileLayer.RoadNet();   //路网图层
+
+            // 3. 初始化地图实例
+            const centerPoint = bd09ToGcj02(112.55, 37.87);
+
+            map = new AMapObj.Map('map-container', {
+                zoom: 8,
+                center: centerPoint,
+                viewMode: '3D',
+                pitch: 0,
+                // 叠加图层
+                layers: [
+                    satelliteLayer,
+                    roadNetLayer
+                ]
+            });
+
+            map.addControl(new AMapObj.Scale());
+            map.addControl(new AMapObj.ToolBar());
+
+            // 4. 加载数据
             allData = validateAndCleanData(await (await fetch('data.json')).json().catch(() => {
                 console.error('data.json 加载失败');
                 return [];
             }));
             if (!allData.length) throw new Error('data.json 为空或无效');
 
-            // 提前缓存项目
+            // 缓存项目
             allData.forEach(city => {
                 city.districts.forEach(district => {
                     district.projects.forEach(project => {
@@ -58,8 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
             setupInteractions();
 
             updateMapMarkersVisibility(flatTreeData.filter(item => item.type === 'project').map(item => item.id));
+
             document.querySelectorAll('.loading').forEach(el => el.remove());
             console.info('初始化完成');
+
         } catch (error) {
             console.error('初始化失败:', error);
             treeContainer.innerHTML = `<p style="color: red;">加载失败：${error.message}</p>`;
@@ -68,41 +110,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function validateAndCleanData(data) {
         if (!Array.isArray(data)) throw new Error('数据必须是数组');
-        const warnings = [];
-        data.forEach((city, cityIndex) => {
-            if (!city.city || !Array.isArray(city.districts)) {
-                throw new Error(`城市数据格式无效: index ${cityIndex}`);
-            }
-            city.districts.forEach((district, districtIndex) => {
-                if (!district.district || !Array.isArray(district.projects)) {
-                    throw new Error(`区县数据无效: ${city.city} -> index ${districtIndex}`);
-                }
+        data.forEach(city => {
+            city.districts.forEach(district => {
                 for (let i = district.projects.length - 1; i >= 0; i--) {
                     const project = district.projects[i];
-                    if (!project.id || !project.name || !project.url || isNaN(project.longitude) || isNaN(project.latitude)) {
-                        warnings.push(`项目数据无效或坐标缺失，已跳过: ${project.id || project.name || '未知项目'}`);
+                    if (!project.id || !project.name || isNaN(project.longitude)) {
                         district.projects.splice(i, 1);
                     } else if (!project.protectionLevel) {
-                        console.warn(`项目无保护级别: ${project.id}, 默认 '未定级'`);
                         project.protectionLevel = '未定级';
                     }
                 }
             });
         });
-        if (warnings.length) console.warn('数据验证问题:\n- ' + warnings.join('\n- '));
         return data;
-    }
-
-    function loadBMap() {
-        return new Promise((resolve, reject) => {
-            if (window.BMapGL) return resolve();
-            const script = document.createElement('script');
-            const callbackName = 'initBMap_' + Math.random().toString(36).slice(2);
-            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
-            script.onerror = () => reject(new Error('百度地图 API 加载失败'));
-            document.body.appendChild(script);
-            window[callbackName] = resolve;
-        });
     }
 
     function buildFlatTreeData(mode) {
@@ -123,53 +143,42 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 });
             });
-        } else { // 'level' 模式
+        } else {
             const levelGroups = new Map(LEVELS.map(l => [l, []]));
             allData.forEach(city => {
                 city.districts.forEach(district => {
                     district.projects.forEach(project => {
                         const level = project.protectionLevel || '未定级';
-                        if (levelGroups.has(level)) {
-                            levelGroups.get(level).push(project);
-                        }
+                        if (levelGroups.has(level)) levelGroups.get(level).push(project);
                         totalProjectCount++;
                     });
                 });
             });
-
             flatData.push({ type: 'province', id: 'shanxi', name: '山西省', projectCount: totalProjectCount, expanded: true, level: 0, visible: true });
-
             LEVELS.forEach(levelName => {
                 const projects = levelGroups.get(levelName) || [];
-                const count = projects.length;
                 const categoryId = `level-${levelName.toLowerCase().slice(0, 3)}`;
-                flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: count, expanded: false, level: 1, parentId: 'shanxi', visible: true });
+                flatData.push({ type: 'level-category', id: categoryId, name: levelName, projectCount: projects.length, expanded: false, level: 1, parentId: 'shanxi', visible: true });
                 projects.forEach(project => {
                     flatData.push({ type: 'project', id: project.id, name: project.name, url: project.url, level: 2, parentId: categoryId, visible: false });
                 });
             });
         }
-
         return flatData;
     }
 
-    // 新增：从 flatTreeData 递归构建 DOM（替换原 buildTreeMenu）
     function buildTreeMenu() {
         treeContainer.innerHTML = '';
         const ul = document.createElement('ul');
         ul.className = 'tree-root';
-
         const root = flatTreeData.find(i => i.type === 'province');
         if (root) ul.appendChild(buildNodeFromFlat(root));
-
         treeContainer.appendChild(ul);
 
-        // 默认折叠级别模式子项目
         if (mode === 'level') {
-            treeContainer.querySelectorAll('.level-category-item').forEach(li => {
+            document.querySelectorAll('.level-category-item').forEach(li => {
                 li.classList.remove('expanded');
-                const subList = li.querySelector('ul');
-                if (subList) subList.querySelectorAll('li').forEach(subLi => subLi.style.display = 'none');
+                li.querySelector('ul')?.querySelectorAll('li').forEach(s => s.style.display = 'none');
             });
         }
     }
@@ -197,33 +206,63 @@ document.addEventListener('DOMContentLoaded', function () {
         return li;
     }
 
-    // 图标缓存
+    // --- 修复1：获取高德图标（颜色修正） ---
     function getCityIcon(city) {
         if (iconCache.has(city)) return iconCache.get(city);
-        const color = (CITY_COLORS[city] || DEFAULT_COLOR).replace('#', '%23');
-        const icon = new BMapGL.Icon(
-            `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="${color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/><circle fill="rgba(25, 35, 50, 0.8)" cx="12" cy="9.5" r="1.5"/></svg>`,
-            new BMapGL.Size(28, 28), { anchor: new BMapGL.Size(14, 28) }
-        );
+
+        //使用原始颜色
+        const color = CITY_COLORS[city] || DEFAULT_COLOR;
+
+        const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="${color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/><circle fill="rgba(25, 35, 50, 0.8)" cx="12" cy="9.5" r="1.5"/></svg>`;
+
+        const icon = new AMapObj.Icon({
+            size: new AMapObj.Size(28, 28),
+            image: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgContent),
+            imageSize: new AMapObj.Size(28, 28),
+            anchor: 'bottom-center'
+        });
+
         iconCache.set(city, icon);
         return icon;
     }
 
+    // --- 添加高德标记 ---
     function addMapMarkers() {
         let markerCount = 0;
+
         allData.forEach(cityData => {
             const icon = getCityIcon(cityData.city);
             cityData.districts.forEach(districtData => {
                 districtData.projects.forEach(project => {
                     try {
-                        const point = new BMapGL.Point(project.longitude, project.latitude);
-                        const marker = new BMapGL.Marker(point, { enableDragging: false, icon });
-                        map.addOverlay(marker);
+                        const lnglat = bd09ToGcj02(project.longitude, project.latitude);
+
+                        const marker = new AMapObj.Marker({
+                            position: new AMapObj.LngLat(lnglat[0], lnglat[1]),
+                            icon: icon,
+                            title: project.name,
+                            anchor: 'bottom-center',
+                            offset: new AMapObj.Pixel(0, 0)
+                        });
 
                         const linksHtml = generateLinksHtml(project);
-                        const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
+                        const contentHtml = `
+                            <div class="custom-info-window">
+                                <div class="info-header">
+                                    <b>${project.name}</b>
+                                    <span class="close-btn" onclick="closeInfoWindow()">×</span>
+                                </div>
+                                <div class="info-body">${linksHtml}</div>
+                            </div>
+                        `;
 
-                        marker.addEventListener("click", () => map.openInfoWindow(new BMapGL.InfoWindow(content), point));
+                        marker.on('click', () => {
+                            openCustomInfoWindow(marker.getPosition(), contentHtml);
+                        });
+
+                        marker.hide();
+                        marker.setMap(map);
+
                         allMapMarkers.set(project.id, marker);
                         markerCount++;
                     } catch (err) {
@@ -235,16 +274,33 @@ document.addEventListener('DOMContentLoaded', function () {
         console.info('地图标记点添加:', markerCount);
     }
 
+    // --- 自定义信息窗体逻辑 ---
+    function openCustomInfoWindow(position, content) {
+        if (currentInfoWindow) {
+            currentInfoWindow.close();
+        }
+
+        currentInfoWindow = new AMapObj.InfoWindow({
+            isCustom: true,
+            content: content,
+            offset: new AMapObj.Pixel(0, -35),
+            autoMove: false //禁止窗体自动移动地图，手动控制中心点
+        });
+
+        currentInfoWindow.open(map, position);
+    }
+
+    window.closeInfoWindow = function () {
+        if (currentInfoWindow) currentInfoWindow.close();
+    };
+
     function getChildProjectIds(parentId) {
         const projectIds = [];
         function collectProjects(id) {
             flatTreeData.forEach(item => {
                 if (item.parentId === id) {
-                    if (item.type === 'project') {
-                        projectIds.push(item.id);
-                    } else {
-                        collectProjects(item.id);
-                    }
+                    if (item.type === 'project') projectIds.push(item.id);
+                    else collectProjects(item.id);
                 }
             });
         }
@@ -270,41 +326,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchBox.value = '';
                 filterTree('');
             });
-        } else {
-            console.warn('未找到模式切换按钮');
         }
 
         treeContainer.addEventListener('click', function (event) {
             const target = event.target;
-
-            // 项目点击
             const projectLink = target.closest('.project-link');
+
             if (projectLink) {
                 event.preventDefault();
                 const projectId = projectLink.dataset.projectId;
                 const marker = allMapMarkers.get(projectId);
                 if (!map || !marker) return;
 
-                if (map.getInfoWindow()) map.closeInfoWindow();
+                if (currentInfoWindow) currentInfoWindow.close();
 
                 const project = projectCache.get(projectId);
                 if (!project) return;
 
                 const linksHtml = generateLinksHtml(project);
+                const contentHtml = `
+                    <div class="custom-info-window">
+                        <div class="info-header">
+                            <b>${project.name}</b>
+                            <span class="close-btn" onclick="closeInfoWindow()">×</span>
+                        </div>
+                        <div class="info-body">${linksHtml}</div>
+                    </div>
+                `;
 
-                const content = `<div><b>${project.name}</b>${linksHtml}</div>`;
-                const point = marker.getPosition();
+                const position = marker.getPosition();
 
-                map.flyTo(point, 17, { duration: 800, pitch: 45 });
-                map.addEventListener('moveend', function handler() {
-                    map.openInfoWindow(new BMapGL.InfoWindow(content), point);
-                    map.removeEventListener('moveend', handler);
-                });
+                // 缩放级别，动画时间
+                map.setZoomAndCenter(15, position, false, 800);
+
+                // 地图动画结束后再打开窗体
+                setTimeout(() => {
+                    openCustomInfoWindow(position, contentHtml);
+                }, 850);
 
                 return;
             }
 
-            // 展开/折叠
             const clickableTitle = target.closest('.clickable-title');
             if (clickableTitle) {
                 const parent = clickableTitle.closest('li');
@@ -339,35 +401,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function filterTree(searchTerm) {
             const visibleIds = [];
-            const noResults = document.querySelector('.no-results');
-            if (noResults) noResults.remove();
+            document.querySelector('.no-results')?.remove();
 
             if (searchTerm === '') {
                 document.querySelectorAll('li').forEach(li => li.style.display = 'none');
                 document.querySelectorAll('.province-item, .city-item, .level-category-item').forEach(li => {
                     li.style.display = 'block';
                     li.classList.remove('expanded');
-                    const ul = li.querySelector('ul');
-                    if (ul) ul.querySelectorAll('li').forEach(sub => sub.style.display = 'none');
+                    li.querySelector('ul')?.querySelectorAll('li').forEach(s => s.style.display = 'none');
                 });
                 document.querySelector('.province-item')?.classList.add('expanded');
                 visibleIds.push(...flatTreeData.filter(i => i.type === 'project').map(i => i.id));
             } else {
-                const foundProjectIds = new Set();
+                const foundIds = new Set();
                 allData.forEach(city => city.districts.forEach(d => d.projects.forEach(p => {
-                    if (p.name.toLowerCase().includes(searchTerm)) foundProjectIds.add(p.id);
+                    if (p.name.toLowerCase().includes(searchTerm)) foundIds.add(p.id);
                 })));
-                visibleIds.push(...foundProjectIds);
+                visibleIds.push(...foundIds);
 
                 document.querySelectorAll('li').forEach(li => li.style.display = 'none');
-
                 let hasResults = false;
+
                 document.querySelectorAll('.project-item').forEach(projectLi => {
                     const link = projectLi.querySelector('.project-link');
                     if (link && link.textContent.toLowerCase().includes(searchTerm)) {
                         hasResults = true;
                         projectLi.style.display = 'block';
-
                         let parent = projectLi.parentElement;
                         while (parent && parent.tagName === 'UL') {
                             const parentLi = parent.parentElement;
@@ -383,7 +442,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!hasResults && searchTerm) {
                     const p = document.createElement('p');
                     p.className = 'no-results';
-                    p.style.cssText = 'color: #ffd700; text-align: center; padding: 10px;';
                     p.textContent = '无匹配结果';
                     treeContainer.appendChild(p);
                 }
@@ -401,10 +459,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (visibleSet.size === lastVisible.size && [...visibleSet].every(id => lastVisible.has(id))) return;
 
         allMapMarkers.forEach((marker, id) => {
-            marker[visibleSet.has(id) ? 'show' : 'hide']();
+            if (visibleSet.has(id)) {
+                marker.show();
+            } else {
+                marker.hide();
+            }
         });
         lastVisible = new Set(visibleSet);
-        console.info('更新标记点显隐:', visibleSet.size);
     }
 
     function generateLinksHtml(project) {
@@ -412,18 +473,16 @@ document.addEventListener('DOMContentLoaded', function () {
         let linksHtml = '';
         if (urls.length === 0) {
             linksHtml = `<p style="color:#aaa;font-style:italic;">暂无全景链接</p>`;
-        } else if (urls.length === 1) {
-            linksHtml = `<p><a href="${urls[0]}" rel="noopener noreferrer">点击进入720全景</a></p>`;
         } else {
-            // 新增：检查 url_names
-            const urlNames = project.url_names || []; // 可选字段，默认空数组
+            const urlNames = project.url_names || [];
             urls.forEach((u, i) => {
-                const name = urlNames[i] || `全景 ${i + 1}`; // 优先用名字，fallback 旧标签
+                const name = urlNames[i] || (urls.length === 1 ? '点击进入720全景' : `全景 ${i + 1}`);
                 linksHtml += `<p><a href="${u}" rel="noopener noreferrer">${name}</a></p>`;
             });
         }
         return linksHtml;
     }
 
+    // 启动
     initialize();
 });
