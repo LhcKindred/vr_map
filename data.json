@@ -79,6 +79,14 @@
             "longitude": 112.39437815966826,
             "latitude": 37.939621555451986,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "太原市-尖草坪区-816",
+            "name": "净因寺",
+            "url": "",
+            "longitude": 112.44672301508615,
+            "latitude": 38.00379819068535,
+            "protectionLevel": "国保"
           }
         ]
       },
@@ -143,6 +151,14 @@
             ],
             "longitude": 112.5478670276714,
             "latitude": 37.75248725383872,
+            "protectionLevel": "未定级"
+          },
+          {
+            "id": "太原市-晋源区-831",
+            "name": "西寨真武庙",
+            "url": "",
+            "longitude": 112.51335849981324,
+            "latitude": 37.74640611888907,
             "protectionLevel": "未定级"
           }
         ]
@@ -324,6 +340,14 @@
             "longitude": 112.55099205903423,
             "latitude": 37.7056865105441,
             "protectionLevel": "未定级"
+          },
+          {
+            "id": "太原市-小店区-819",
+            "name": "西蒲甘露寺",
+            "url": "",
+            "longitude": 112.52578828650319,
+            "latitude": 37.68567549765574,
+            "protectionLevel": "省保"
           }
         ]
       },
@@ -719,6 +743,14 @@
             "longitude": 111.75122153175543,
             "latitude": 37.24241924587598,
             "protectionLevel": "市保"
+          },
+          {
+            "id": "吕梁市-汾阳市-814",
+            "name": "文峰塔",
+            "url": "",
+            "longitude": 111.82198555309357,
+            "latitude": 37.25125177285865,
+            "protectionLevel": "国保"
           }
         ]
       },
@@ -794,6 +826,14 @@
             "longitude": 112.28962360201194,
             "latitude": 37.55614172140105,
             "protectionLevel": "未定级"
+          },
+          {
+            "id": "吕梁市-交城县-826",
+            "name": "梁家庄狐侯祠",
+            "url": "",
+            "longitude": 112.16349280196611,
+            "latitude": 37.543729611976225,
+            "protectionLevel": "省保"
           }
         ]
       },
@@ -808,6 +848,14 @@
             ],
             "longitude": 111.14928,
             "latitude": 36.905603,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "吕梁市-交口县-828",
+            "name": "西庄古建筑群",
+            "url": "",
+            "longitude": 111.29896428113669,
+            "latitude": 36.77882871727323,
             "protectionLevel": "省保"
           }
         ]
@@ -1064,6 +1112,14 @@
             "longitude": 112.00062178224788,
             "latitude": 37.38297448722835,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "吕梁市-文水县-830",
+            "name": "武陵狐神庙",
+            "url": "",
+            "longitude": 112.10357703345625,
+            "latitude": 37.50706132044497,
+            "protectionLevel": "未定级"
           }
         ]
       },
@@ -1219,6 +1275,14 @@
             "longitude": 111.85615531993312,
             "latitude": 37.067649400706756,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "吕梁市-孝义市-815",
+            "name": "孝义三皇庙",
+            "url": "",
+            "longitude": 111.75682382577264,
+            "latitude": 37.14604733047209,
+            "protectionLevel": "国保"
           }
         ]
       },
@@ -1234,6 +1298,19 @@
             "longitude": 111.06601127514374,
             "latitude": 38.470845231887424,
             "protectionLevel": "国保"
+          }
+        ]
+      },
+      {
+        "district": "中阳县",
+        "projects": [
+          {
+            "id": "吕梁市-中阳县-827",
+            "name": "柏洼山龙泉观",
+            "url": "",
+            "longitude": 111.18547025946991,
+            "latitude": 37.363488921475685,
+            "protectionLevel": "省保"
           }
         ]
       }
@@ -1549,6 +1626,14 @@
             "longitude": 111.94587547673044,
             "latitude": 36.95042274274263,
             "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋中市-介休市-811",
+            "name": "张壁古堡",
+            "url": "",
+            "longitude": 111.98337627920444,
+            "latitude": 36.97380166655621,
+            "protectionLevel": "国保"
           }
         ]
       },
@@ -1614,6 +1699,14 @@
             "longitude": 111.82981206826472,
             "latitude": 36.893958907470925,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "晋中市-灵石县-812",
+            "name": "王家大院",
+            "url": "",
+            "longitude": 111.88247838916531,
+            "latitude": 36.901313777968376,
+            "protectionLevel": "国保"
           }
         ]
       },
@@ -1989,6 +2082,22 @@
             "longitude": 112.00626163600793,
             "latitude": 37.065601744545084,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "晋中市-平遥县-813",
+            "name": "平遥清凉寺",
+            "url": "",
+            "longitude": 112.224888908977,
+            "latitude": 37.10582398674452,
+            "protectionLevel": "国保"
+          },
+          {
+            "id": "晋中市-平遥县-821",
+            "name": "北长寿关岳庙",
+            "url": "",
+            "longitude": 112.22007407133633,
+            "latitude": 37.334177790964596,
+            "protectionLevel": "省保"
           }
         ]
       },
@@ -2134,6 +2243,14 @@
             "longitude": 112.44732816095163,
             "latitude": 37.41342865679755,
             "protectionLevel": "国保"
+          },
+          {
+            "id": "晋中市-祁县-817",
+            "name": "祁县文庙",
+            "url": "",
+            "longitude": 112.34166485512667,
+            "latitude": 37.364666169648444,
+            "protectionLevel": "省保"
           }
         ]
       },
@@ -2259,6 +2376,46 @@
             "longitude": 113.18278032481761,
             "latitude": 37.90140710131871,
             "protectionLevel": "未定级"
+          },
+          {
+            "id": "晋中市-寿阳县-822",
+            "name": "圣母五龙行祠",
+            "url": "",
+            "longitude": 113.18278032481761,
+            "latitude": 37.90140710131871,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "晋中市-寿阳县-823",
+            "name": "冯家山关帝庙",
+            "url": "",
+            "longitude": 113.03904927096718,
+            "latitude": 37.994709669386715,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "晋中市-寿阳县-824",
+            "name": "纂木皇恩寺",
+            "url": "",
+            "longitude": 113.01242226623874,
+            "latitude": 37.676749977375906,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "晋中市-寿阳县-825",
+            "name": "武家村关帝庙",
+            "url": "",
+            "longitude": 113.23901523622752,
+            "latitude": 38.04415017474172,
+            "protectionLevel": "省保"
+          },
+          {
+            "id": "晋中市-寿阳县-829",
+            "name": "百僧庄大王庙",
+            "url": "",
+            "longitude": 112.93923216247016,
+            "latitude": 37.96980627496716,
+            "protectionLevel": "县保"
           }
         ]
       },
@@ -2414,6 +2571,14 @@
             "longitude": 112.55768048982193,
             "latitude": 37.42768997860193,
             "protectionLevel": "县保"
+          },
+          {
+            "id": "晋中市-太谷区-820",
+            "name": "胡村狐爷庙",
+            "url": "",
+            "longitude": 112.61535528624314,
+            "latitude": 37.49018471809091,
+            "protectionLevel": "省保"
           }
         ]
       },
@@ -2694,6 +2859,19 @@
             "longitude": 113.70330443155927,
             "latitude": 36.947021836851825,
             "protectionLevel": "县保"
+          }
+        ]
+      },
+      {
+        "district": "太谷县",
+        "projects": [
+          {
+            "id": "晋中市-太谷县-818",
+            "name": "法安寺",
+            "url": "",
+            "longitude": 112.56026689314551,
+            "latitude": 37.513871042859336,
+            "protectionLevel": "省保"
           }
         ]
       }
