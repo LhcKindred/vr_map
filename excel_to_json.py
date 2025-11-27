@@ -4,28 +4,17 @@ import requests
 import time
 import sys
 import os
-import math
 
 # ==================== 配置 ====================
-GAODE_AK = "4a8c03d91be21ad47bf9dfc619871b3c"          # 请替换为高德 Web 服务 AK
+GAODE_AK = "4a8c03d91be21ad47bf9dfc619871b3c"          # 高德 Web 服务 AK
 excel_file = 'vr_data.xlsx'
 json_file = 'data.json'                  # 读取/写入同一个文件
 # =============================================
 
-def gcj02_to_bd09(lng, lat):
-    """
-    高精度 GCJ-02 → BD-09 转换（基于官方逆推公式）
-    """
-    x = lng
-    y = lat
-    z = math.sqrt(x * x + y * y) + 0.00002 * math.sin(y * math.pi * 3000 / 180)
-    theta = math.atan2(y, x) + 0.000003 * math.cos(x * math.pi * 3000 / 180)
-    bd_lng = z * math.cos(theta) + 0.0065
-    bd_lat = z * math.sin(theta) + 0.006
-    return bd_lng, bd_lat
+# 【移除】不再需要 bd09_to_gcj02 和 gcj02_to_bd09 转换函数
 
 def get_coordinates(address, ak):
-    """高德地理编码 → BD-09"""
+    """高德地理编码 → GCJ-02""" 
     url = "https://restapi.amap.com/v3/geocode/geo"
     params = {"key": ak, "address": address, "output": "JSON"}
     try:
@@ -36,7 +25,8 @@ def get_coordinates(address, ak):
         if data.get("status") == "1" and data.get("geocodes"):
             loc = data["geocodes"][0]["location"]
             gcj_lng, gcj_lat = map(float, loc.split(','))
-            return gcj02_to_bd09(gcj_lng, gcj_lat)
+            # 直接返回 GCJ-02 坐标
+            return gcj_lng, gcj_lat
         else:
             print(f"  -> 高德解析失败: {data.get('info', '未知错误')}")
             return None, None
@@ -106,7 +96,7 @@ for idx, row in df.iterrows():
     key = (city_name, district_name, project_name)
     if key in existing_projects:
         print(f"  -> 项目已存在，跳过: {project_name}")
-        continue
+        continue 
 
     # 新项目 → 高德获取坐标
     address = row.get('位置')
@@ -116,12 +106,13 @@ for idx, row in df.iterrows():
 
     print(f"  -> 查询地址: {address}")
     time.sleep(0.5)  # 避免请求过快
-    lng, lat = get_coordinates(address, GAODE_AK)
+    # 直接获取并使用 GCJ-02 坐标
+    lng, lat = get_coordinates(address, GAODE_AK) 
     if lng is None or lat is None:
         print(f"  -> 坐标获取失败，跳过: {project_name}")
         continue
 
-    print(f"  -> 成功 (BD-09): lng={lng:.6f}, lat={lat:.6f}")
+    print(f"  -> 成功 (GCJ-02): lng={lng:.6f}, lat={lat:.6f}")
 
     # 确保城市/区县结构
     if city_name not in cities_map:
@@ -144,7 +135,8 @@ for idx, row in df.iterrows():
         "url": row.get('链接', ''),
         "longitude": lng,
         "latitude": lat,
-        "protectionLevel": row.get('保护级别', '')
+        "protectionLevel": row.get('保护级别', ''),
+        # "is_gcj02": True # 标记新项目坐标系
     }
     district_obj['projects'].append(project_obj)
     existing_projects[key] = project_obj
@@ -159,5 +151,3 @@ try:
     print(f"\n处理完成！新增 {added_count} 个项目，保存至 {json_file}")
 except Exception as e:
     print(f"写入 JSON 失败: {e}")
-
-# =============================================

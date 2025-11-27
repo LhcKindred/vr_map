@@ -30,16 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleButton.textContent = sidebar.classList.contains('active') ? '✕' : '☰';
     });
 
-    // --- 坐标转换工具 (百度 BD-09 -> 高德 GCJ-02) ---
+    // --- 坐标转换工具 (功能舍弃，直接传高德值) ---
     function bd09ToGcj02(bd_lon, bd_lat) {
-        const x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        /* const x_pi = 3.14159265358979324 * 3000.0 / 180.0;
         const x = bd_lon - 0.0065;
         const y = bd_lat - 0.006;
         const z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);
         const theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);
         const gg_lon = z * Math.cos(theta);
-        const gg_lat = z * Math.sin(theta);
-        return [gg_lon, gg_lat];
+        const gg_lat = z * Math.sin(theta); */
+        return [bd_lon, bd_lat];
     }
 
     // --- 初始化 ---
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });     //路网叠加图层  调整zooms到顶层，使正常观看时不显示路网
 
             // 3. 初始化地图实例
-            const centerPoint = bd09ToGcj02(112.55, 37.87);
+            const centerPoint = bd09ToGcj02(112.55, 36.87);     // 山西省中心点坐标转换(向南偏移10)
 
             map = new AMapObj.Map('map-container', {
                 zoom: 8,
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const urlNames = project.url_names || [];
             urls.forEach((u, i) => {
                 const name = urlNames[i] || (urls.length === 1 ? '点击进入720全景' : `全景 ${i + 1}`);
-                linksHtml += `<p><a href="${u}" rel="noopener noreferrer">${name}</a></p>`;
+                linksHtml += `<p><a href="${u}">${name}</a></p>`;
             });
         }
         return linksHtml;
