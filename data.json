@@ -2928,7 +2928,7 @@
             ],
             "longitude": 113.387024651092,
             "latitude": 36.5022587256058,
-            "protectionLevel": "县级"
+            "protectionLevel": "县保"
           }
         ]
       },
@@ -3448,7 +3448,7 @@
             ],
             "longitude": 112.68245223710822,
             "latitude": 36.87981484824348,
-            "protectionLevel": "县级"
+            "protectionLevel": "县保"
           }
         ]
       },
@@ -4202,7 +4202,7 @@
             ],
             "longitude": 112.90175974284853,
             "latitude": 35.9588541670187,
-            "protectionLevel": "县级"
+            "protectionLevel": "县保"
           },
           {
             "id": "长治市-长子县-547",
@@ -4212,7 +4212,7 @@
             ],
             "longitude": 112.73236991346239,
             "latitude": 36.019182843740154,
-            "protectionLevel": "县级"
+            "protectionLevel": "县保"
           },
           {
             "id": "长治市-长子县-548",
@@ -4222,7 +4222,7 @@
             ],
             "longitude": 112.82375933142988,
             "latitude": 36.07625419861452,
-            "protectionLevel": "县级"
+            "protectionLevel": "县保"
           }
         ]
       }
